@@ -275,25 +275,6 @@ export default function GymAllocationResults({ csvPath = "/data/results.csv" }) 
                   </select>
                 </div>
 
-                <select
-                  value={durationFilter}
-                  onChange={(e) => setDurationFilter(e.target.value)}
-                  className="px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-400 focus:outline-none appearance-none bg-white cursor-pointer"
-                >
-                  <option value="">All Durations</option>
-                  {Object.keys(durationCounts).map((dur) => (
-                    <option key={dur} value={dur}>{dur}</option>
-                  ))}
-                </select>
-
-                <button
-                  onClick={downloadCSV}
-                  disabled={sortedAndFiltered.length === 0}
-                  className="px-5 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  <Download className="w-4 h-4" />
-                  Export
-                </button>
               </div>
             </div>
 
