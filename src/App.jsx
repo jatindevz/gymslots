@@ -2,7 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import Papa from "papaparse";
 import { Search, Filter, Download, Users, Calendar } from "lucide-react";
 
-export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.csv" }) {
+/**
+ * GymAllocationResults
+ * - Now supports 9 slots
+ * - More tolerant CSV header matching
+ * - Robust slot-number detection (1 or 2 digits)
+ *
+ * Props:
+ * - csvPath: path to your CSV (default kept for backwards compatibility)
+ */
+export default function GymAllocationResults({ csvPath = "/data/results.csv" }) {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [slotFilter, setSlotFilter] = useState("");
@@ -23,29 +32,59 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
         return r.text();
       })
       .then((text) => {
-        const parsed = Papa.parse(text, { 
-          header: true, 
+        const parsed = Papa.parse(text, {
+          header: true,
           skipEmptyLines: true,
           dynamicTyping: false,
-          trimHeaders: true
+          trimHeaders: true,
         });
-        
-        if (parsed.errors.length > 0) {
+
+        if (parsed.errors && parsed.errors.length > 0) {
           console.warn("CSV parsing warnings:", parsed.errors);
         }
 
         const rows = parsed.data
           .map((r) => {
-            const keys = Object.keys(r);
+            // helper: find the best matching key from row object (tolerant)
+            const findKey = (rowObj, candidates = []) => {
+              const norm = (s) => String(s || "").replace(/\s+/g, "").toLowerCase();
+              const keys = Object.keys(rowObj);
+              for (let cand of candidates) {
+                for (let k of keys) {
+                  if (norm(k) === norm(cand)) return k;
+                }
+              }
+              // fallback: try matching by substring if exact didn't hit
+              for (let k of keys) {
+                const nk = norm(k);
+                for (let cand of candidates) {
+                  if (nk.includes(norm(cand).replace(/[^a-z0-9]/g, ""))) return k;
+                }
+              }
+              return null;
+            };
+
+            const nameKey = findKey(r, ["FullName", "Full Name", "Name", "FULLNAME"]);
+            const rollKey = findKey(r, ["RollNumber", "Roll Number", "Roll", "ROLLNUMBER", "ROLL"]);
+            const emailKey = findKey(r, ["Email", "E-mail", "EMAIL"]);
+            const durationKey = findKey(r, ["Duration", "DURATION"]);
+            const slotKey = findKey(r, ["Allocated Slot", "AllocatedSlot", "Allocated", "Slot", "SLOT", "Allocated Slot "]);
+
+            const safe = (key) => {
+              if (!key) return "";
+              const val = r[key];
+              return val == null ? "" : String(val).trim();
+            };
+
             return {
-              name: (r.FULLNAME || "").toString().trim(),
-              roll: (r.ROLLNUMBER || r.Roll || r.ROLL || r[keys[1]] || "").toString().trim(),
-              email: (r.email || r.Email || r.EMAIL || r[keys[2]] || "").toString().trim(),
-              duration: (r.Duration || r.Duration || r.DURATION || r[keys[4]] || "").toString().trim(),
-              slot: (r.AllocatedSlot || r.Slot || r.SLOT || r[keys[4]] || "").toString().trim(),
+              name: safe(nameKey),
+              roll: safe(rollKey),
+              email: safe(emailKey),
+              duration: safe(durationKey),
+              slot: safe(slotKey),
             };
           })
-          .filter(s => s.name || s.roll || s.email);
+          .filter((s) => s.name || s.roll || s.email);
 
         if (!cancelled) {
           setStudents(rows);
@@ -64,13 +103,15 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
     };
   }, [csvPath]);
 
+  // count students per slot (supports slot numbers 1..99)
   const slotCounts = useMemo(() => {
     const counts = {};
     students.forEach((s) => {
-      const slotUpper = (s.slot || "").toUpperCase();
-      const match = slotUpper.match(/SLOT\s*(\d)/);
+      const slotStr = (s.slot || "").toUpperCase();
+      // match "SLOT 1", "SLOT 01", or "SLOT 10", or just "1" in some weird CSVs
+      const match = slotStr.match(/SLOT\s*([0-9]{1,2})/i) || slotStr.match(/\b([0-9]{1,2})\b/);
       if (match) {
-        const key = `SLOT ${match[1]}`;
+        const key = `SLOT ${parseInt(match[1], 10)}`;
         counts[key] = (counts[key] || 0) + 1;
       }
     });
@@ -102,14 +143,17 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
     result.sort((a, b) => {
       let aVal = a[sortBy] || "";
       let bVal = b[sortBy] || "";
-      
+
       if (sortBy === "slot") {
-        const aMatch = aVal.match(/\d+/);
-        const bMatch = bVal.match(/\d+/);
-        aVal = aMatch ? parseInt(aMatch[0]) : 999;
-        bVal = bMatch ? parseInt(bMatch[0]) : 999;
+        const aMatch = (aVal || "").match(/([0-9]{1,2})/);
+        const bMatch = (bVal || "").match(/([0-9]{1,2})/);
+        aVal = aMatch ? parseInt(aMatch[0], 10) : 999;
+        bVal = bMatch ? parseInt(bMatch[0], 10) : 999;
+      } else {
+        aVal = String(aVal).toLowerCase();
+        bVal = String(bVal).toLowerCase();
       }
-      
+
       if (aVal < bVal) return sortOrder === "asc" ? -1 : 1;
       if (aVal > bVal) return sortOrder === "asc" ? 1 : -1;
       return 0;
@@ -120,7 +164,7 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
 
   const handleSort = (column) => {
     if (sortBy === column) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+      setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
     } else {
       setSortBy(column);
       setSortOrder("asc");
@@ -133,11 +177,12 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `gym-allocation-filtered-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `gym-allocation-filtered-${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
+  // badge classes for up to 9 slots
   function slotBadgeClass(slot) {
     if (!slot) return "bg-gray-200 text-gray-800";
     const upper = slot.toUpperCase();
@@ -146,15 +191,24 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
     if (upper.includes("SLOT 3")) return "bg-green-100 text-green-800 border border-green-300";
     if (upper.includes("SLOT 4")) return "bg-red-100 text-red-800 border border-red-300";
     if (upper.includes("SLOT 5")) return "bg-purple-100 text-purple-800 border border-purple-300";
+    if (upper.includes("SLOT 6")) return "bg-amber-100 text-amber-800 border border-amber-300";
+    if (upper.includes("SLOT 7")) return "bg-pink-100 text-pink-800 border border-pink-300";
+    if (upper.includes("SLOT 8")) return "bg-sky-100 text-sky-800 border border-sky-300";
+    if (upper.includes("SLOT 9")) return "bg-lime-100 text-lime-800 border border-lime-300";
     return "bg-gray-100 text-gray-800 border border-gray-300";
   }
 
+  // definitive slot info for the UI (9 slots)
   const slotInfo = [
-    { num: 1, time: "5:30 AM", color: "yellow" },
-    { num: 2, time: "7:00 AM", color: "cyan" },
-    { num: 3, time: "4:00 PM", color: "green" },
-    { num: 4, time: "5:30 PM", color: "red" },
-    { num: 5, time: "7:00 PM", color: "purple" }
+    { num: 1, time: "4:30 AM - 5:30 AM", color: "yellow" },
+    { num: 2, time: "5:30 AM - 7:00 AM", color: "cyan" },
+    { num: 3, time: "7:00 AM - 8:30 AM", color: "green" },
+    { num: 4, time: "2:30 PM - 4:00 PM", color: "red" },
+    { num: 5, time: "4:00 PM - 5:30 PM", color: "purple" },
+    { num: 6, time: "5:30 PM - 7:00 PM", color: "amber" },
+    { num: 7, time: "7:00 PM - 8:30 PM", color: "pink" },
+    { num: 8, time: "8:30 PM - 10:00 PM", color: "sky" },
+    { num: 9, time: "10:00 PM - 11:30 PM", color: "lime" },
   ];
 
   return (
@@ -181,9 +235,9 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
                 <div className="text-3xl font-bold mt-1">{students.length}</div>
               </div>
 
-              {slotInfo.map(({ num, time, color }) => (
+              {slotInfo.map(({ num, time }) => (
                 <div key={num} className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100">
-                  <div className={`text-2xl font-bold text-${color}-600`}>
+                  <div className={`text-2xl font-bold`}>
                     {slotCounts[`SLOT ${num}`] || 0}
                   </div>
                   <div className="text-xs text-gray-600 font-medium mt-1">Slot {num}</div>
@@ -227,7 +281,7 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
                   className="px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-400 focus:outline-none appearance-none bg-white cursor-pointer"
                 >
                   <option value="">All Durations</option>
-                  {Object.keys(durationCounts).map(dur => (
+                  {Object.keys(durationCounts).map((dur) => (
                     <option key={dur} value={dur}>{dur}</option>
                   ))}
                 </select>
@@ -272,28 +326,22 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
                 <thead className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white sticky top-0">
                   <tr>
                     <th className="px-4 py-4 text-left text-sm font-semibold">#</th>
-                    <th 
+                    <th
                       onClick={() => handleSort("name")}
-                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-white hover:bg-opacity-10"
+                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-opacity-10"
                     >
                       Name {sortBy === "name" && (sortOrder === "asc" ? "↑" : "↓")}
                     </th>
-                    <th 
+                    <th
                       onClick={() => handleSort("roll")}
-                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-white hover:bg-opacity-10"
+                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-opacity-10"
                     >
                       Roll {sortBy === "roll" && (sortOrder === "asc" ? "↑" : "↓")}
                     </th>
                     <th className="px-4 py-4 text-left text-sm font-semibold">Email</th>
-                    <th 
-                      onClick={() => handleSort("duration")}
-                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-white hover:bg-opacity-10"
-                    >
-                      Duration {sortBy === "duration" && (sortOrder === "asc" ? "↑" : "↓")}
-                    </th>
-                    <th 
+                    <th
                       onClick={() => handleSort("slot")}
-                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-white hover:bg-opacity-10"
+                      className="px-4 py-4 text-left text-sm font-semibold cursor-pointer hover:bg-opacity-10"
                     >
                       Slot {sortBy === "slot" && (sortOrder === "asc" ? "↑" : "↓")}
                     </th>
@@ -310,19 +358,8 @@ export default function GymAllocationResults({ csvPath = "/data/results_Jan-Feb.
                       <td className="px-4 py-4 text-gray-700 font-mono text-sm">{s.roll}</td>
                       <td className="px-4 py-4 text-gray-600 text-sm">{s.email}</td>
                       <td className="px-4 py-4">
-                        <span
-                          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                            s.duration === "Complete Semester" 
-                              ? "bg-green-100 text-green-800 border border-green-300" 
-                              : "bg-blue-100 text-blue-800 border border-blue-300"
-                          }`}
-                        >
-                          {s.duration}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${slotBadgeClass(s.slot)}`}>
-                          {s.slot}
+                          {s.slot || "Unassigned"}
                         </span>
                       </td>
                     </tr>
