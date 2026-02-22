@@ -11,7 +11,7 @@ import { Search, Filter, Download, Users, Calendar } from "lucide-react";
  * Props:
  * - csvPath: path to your CSV (default kept for backwards compatibility)
  */
-export default function GymAllocationResults({ csvPath = "/data/results.csv" }) {
+export default function GymAllocationResults({ csvPath = "/data/results-new.csv" }) {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [slotFilter, setSlotFilter] = useState("");
