@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Slot Allocations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .page-break {
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-blue-800 text-white p-6 text-center">
+            <h1 class="text-2xl font-bold">Gym Slot Allocations</h1>
+        </div>
+
+        <!-- Slot 1 -->
+        <div class="p-6 border-b border-gray-300">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-blue-800">Slot 1</h2>
+                <p class="text-gray-600">5:30 AM - 7:00 AM</p>
+            </div>
+            <table class="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-400 p-2 text-left">Name</th>
+                        <th class="border border-gray-400 p-2 text-left">Roll Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Mobile Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Allocated Slot</th>
+                    </tr>
+                </thead>
+                <tbody id="slot1-data">
+                    <!-- Slot 1 data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slot 2 -->
+        <div class="p-6 border-b border-gray-300">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-blue-800">Slot 2</h2>
+                <p class="text-gray-600">7:00 AM - 8:30 AM</p>
+            </div>
+            <table class="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-400 p-2 text-left">Name</th>
+                        <th class="border border-gray-400 p-2 text-left">Roll Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Mobile Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Allocated Slot</th>
+                    </tr>
+                </thead>
+                <tbody id="slot2-data">
+                    <!-- Slot 2 data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slot 3 -->
+        <div class="p-6 border-b border-gray-300">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-blue-800">Slot 3</h2>
+                <p class="text-gray-600">4:00 PM - 5:30 PM</p>
+            </div>
+            <table class="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-400 p-2 text-left">Name</th>
+                        <th class="border border-gray-400 p-2 text-left">Roll Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Mobile Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Allocated Slot</th>
+                    </tr>
+                </thead>
+                <tbody id="slot3-data">
+                    <!-- Slot 3 data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slot 4 -->
+        <div class="p-6 border-b border-gray-300">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-blue-800">Slot 4</h2>
+                <p class="text-gray-600">5:30 PM - 7:00 PM</p>
+            </div>
+            <table class="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-400 p-2 text-left">Name</th>
+                        <th class="border border-gray-400 p-2 text-left">Roll Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Mobile Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Allocated Slot</th>
+                    </tr>
+                </thead>
+                <tbody id="slot4-data">
+                    <!-- Slot 4 data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slot 5 -->
+        <div class="p-6">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-blue-800">Slot 5</h2>
+                <p class="text-gray-600">7:00 PM - 8:30 PM</p>
+            </div>
+            <table class="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr class="bg-blue-100">
+                        <th class="border border-gray-400 p-2 text-left">Name</th>
+                        <th class="border border-gray-400 p-2 text-left">Roll Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Mobile Number</th>
+                        <th class="border border-gray-400 p-2 text-left">Allocated Slot</th>
+                    </tr>
+                </thead>
+                <tbody id="slot5-data">
+                    <!-- Slot 5 data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Print Button -->
+        <div class="p-6 bg-gray-100 no-print">
+            <div class="flex justify-center">
+                <button id="print-btn" class="bg-blue-800 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200">
+                    Print Allocations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data from the CSV
+        const csvData = [
+            {timestamp: "10/21/2025 22:00:26", email: "125me0034@iiit.ac.in", name: "Madhav bansal", roll: "125me0034", mobile: "9548022550", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:28", email: "525me0004@iiitk.ac.in", name: "Kartik Gosain", roll: "525me0004", mobile: "9528179460", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:29", email: "125me0025@iiitk.ac.in", name: "Anuj Sarode", roll: "125me0025", mobile: "7020330369", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:30", email: "525cs0008@iiitk.ac.in", name: "VANTHALA JASWANTH", roll: "525cs0008", mobile: "9346298313", pref1: "SLOT 5 (7:00PM TO 8:30PM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 1 (5:30AM TO 7:00 AM)", allocated: "SLOT 5 (7:00PM TO 8:30PM)"},
+            {timestamp: "10/21/2025 22:00:31", email: "124ad0036@iiitk.ac.in", name: "Ajay", roll: "124ad0036", mobile: "7276243837", pref1: "SLOT 4 (5:30PM TO 7:00PM)", pref2: "SLOT 1 (5:30AM TO 7:00 AM)", pref3: "SLOT 2 (7:00AM TO 8:30AM)", allocated: "SLOT 4 (5:30PM TO 7:00PM)"},
+            {timestamp: "10/21/2025 22:00:32", email: "123ad0024@iiitk.ac.in", name: "Tushar Venkat Challa", roll: "123AD0024", mobile: "6300942144", pref1: "SLOT 5 (7:00PM TO 8:30PM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 4 (5:30PM TO 7:00PM)"},
+            {timestamp: "10/21/2025 22:00:36", email: "525EC0002@IIITK.AC.IN", name: "Devanshu Dev", roll: "525EC0002", mobile: "7370001703", pref1: "SLOT 5 (7:00PM TO 8:30PM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 3 (4:00PM TO 5:30PM)", allocated: "SLOT 4 (5:30PM TO 7:00PM)"},
+            {timestamp: "10/21/2025 22:00:37", email: "125ad0008@iiitk.ac.in", name: "Priyansh gahlot", roll: "125ad0008", mobile: "8559937050", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:38", email: "kkrishk2008@gmail.com", name: "KATABATHINA KRISHNA KUMAR", roll: "125CS0024", mobile: "8712810839", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 2 (7:00AM TO 8:30AM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:39", email: "523me0004@iiitk.ac.in", name: "James edward", roll: "523me0004", mobile: "8074540831", pref1: "SLOT 2 (7:00AM TO 8:30AM)", pref2: "SLOT 5 (7:00PM TO 8:30PM)", pref3: "SLOT 1 (5:30AM TO 7:00 AM)", allocated: "SLOT 2 (7:00AM TO 8:30AM)"},
+            {timestamp: "10/21/2025 22:00:43", email: "124cd0072@iiitk.ac.in", name: "Beram sylesh", roll: "124cs0072", mobile: "7569281112", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 1 (5:30AM TO 7:00 AM)", pref3: "SLOT 1 (5:30AM TO 7:00 AM)", allocated: "SLOT 1 (5:30AM TO 7:00 AM)"},
+            {timestamp: "10/21/2025 22:00:48", email: "225cs2006@iiitk.ac.in", name: "D S Vedhaviyas", roll: "225cs2006", mobile: "6301694283", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 2 (7:00AM TO 8:30AM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 2 (7:00AM TO 8:30AM)"},
+            {timestamp: "10/21/2025 22:00:56", email: "122ad0058@iiitk.ac.in", name: "Gedda Gnaneswar", roll: "122AD0058", mobile: "7799339292", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 2 (7:00AM TO 8:30AM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 2 (7:00AM TO 8:30AM)"},
+            {timestamp: "10/21/2025 22:01:05", email: "125CS0053@iiitk.ac.in", name: "M charan Sai Aditya", roll: "125cs0053", mobile: "8919252477", pref1: "SLOT 4 (5:30PM TO 7:00PM)", pref2: "SLOT 5 (7:00PM TO 8:30PM)", pref3: "SLOT 3 (4:00PM TO 5:30PM)", allocated: "SLOT 3 (4:00PM TO 5:30PM)"},
+            {timestamp: "10/21/2025 22:01:44", email: "525me0014@iiitk.ac.in", name: "Kurakula sai", roll: "525ME0014", mobile: "9014901354", pref1: "SLOT 1 (5:30AM TO 7:00 AM)", pref2: "SLOT 5 (7:00PM TO 8:30PM)", pref3: "SLOT 3 (4:00PM TO 5:30PM)", allocated: "SLOT 3 (4:00PM TO 5:30PM)"},
+            {timestamp: "10/21/2025 22:13:29", email: "123me0013@iiitk.ac.in", name: "Uday Paul", roll: "123me0013", mobile: "8921339435", pref1: "SLOT 3 (4:00PM TO 5:30PM)", pref2: "SLOT 4 (5:30PM TO 7:00PM)", pref3: "SLOT 5 (7:00PM TO 8:30PM)", allocated: "SLOT 3 (4:00PM TO 5:30PM)"}
+        ];
+
+        // Function to populate slot tables
+        function populateSlotTables() {
+            // Group data by allocated slot
+            const slot1Data = csvData.filter(entry => entry.allocated.includes("SLOT 1"));
+            const slot2Data = csvData.filter(entry => entry.allocated.includes("SLOT 2"));
+            const slot3Data = csvData.filter(entry => entry.allocated.includes("SLOT 3"));
+            const slot4Data = csvData.filter(entry => entry.allocated.includes("SLOT 4"));
+            const slot5Data = csvData.filter(entry => entry.allocated.includes("SLOT 5"));
+            
+            // Populate Slot 1 table
+            const slot1Table = document.getElementById('slot1-data');
+            slot1Data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-400 p-2">${entry.name}</td>
+                    <td class="border border-gray-400 p-2">${entry.roll}</td>
+                    <td class="border border-gray-400 p-2">${entry.mobile}</td>
+                    <td class="border border-gray-400 p-2">${entry.allocated}</td>
+                `;
+                slot1Table.appendChild(row);
+            });
+            
+            // Populate Slot 2 table
+            const slot2Table = document.getElementById('slot2-data');
+            slot2Data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-400 p-2">${entry.name}</td>
+                    <td class="border border-gray-400 p-2">${entry.roll}</td>
+                    <td class="border border-gray-400 p-2">${entry.mobile}</td>
+                    <td class="border border-gray-400 p-2">${entry.allocated}</td>
+                `;
+                slot2Table.appendChild(row);
+            });
+            
+            // Populate Slot 3 table
+            const slot3Table = document.getElementById('slot3-data');
+            slot3Data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-400 p-2">${entry.name}</td>
+                    <td class="border border-gray-400 p-2">${entry.roll}</td>
+                    <td class="border border-gray-400 p-2">${entry.mobile}</td>
+                    <td class="border border-gray-400 p-2">${entry.allocated}</td>
+                `;
+                slot3Table.appendChild(row);
+            });
+            
+            // Populate Slot 4 table
+            const slot4Table = document.getElementById('slot4-data');
+            slot4Data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-400 p-2">${entry.name}</td>
+                    <td class="border border-gray-400 p-2">${entry.roll}</td>
+                    <td class="border border-gray-400 p-2">${entry.mobile}</td>
+                    <td class="border border-gray-400 p-2">${entry.allocated}</td>
+                `;
+                slot4Table.appendChild(row);
+            });
+            
+            // Populate Slot 5 table
+            const slot5Table = document.getElementById('slot5-data');
+            slot5Data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-400 p-2">${entry.name}</td>
+                    <td class="border border-gray-400 p-2">${entry.roll}</td>
+                    <td class="border border-gray-400 p-2">${entry.mobile}</td>
+                    <td class="border border-gray-400 p-2">${entry.allocated}</td>
+                `;
+                slot5Table.appendChild(row);
+            });
+        }
+        
+        // Set current date
+        function setCurrentDate() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        }
+        
+        // Print functionality
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+        
+        // Initialize the page
+        window.onload = function() {
+            populateSlotTables();
+            setCurrentDate();
+        };
+    </script>
+</body>
+</html>
