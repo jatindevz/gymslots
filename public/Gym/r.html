@@ -1,155 +1,217 @@
-<div style="font-family: 'Roboto', Arial, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; color: #333; line-height: 1.6; max-width: 800px; margin: 0 auto;">
-    <!-- Main Container -->
-    <div style="background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); overflow: hidden;">
-        
-        <!-- Logo Header -->
-        <div style="background-color: white; padding: 20px; text-align: center;">
-            <img src="https://iiitk.ac.in/images/logo/iiitk1.png" alt="IIITK Logo" style="max-width: 250px; height: auto;">
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>IIITDM KURNOOL GYM ACCESS FORM</title>
+
+    <style>
+        /* Page & base */
+        @page { size: A4; margin: 8mm; }
+        html, body { height: 297mm; -webkit-print-color-adjust: exact; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10mm;
+            line-height: 1.25;
+            font-size: 12px; /* tightened */
+            color: #000;
+            box-sizing: border-box;
+        }
+
+        /* Head */
+        h2 {
+            text-align: center;
+            margin: 0 0 6px 0;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-top: 8px;
+            margin-bottom: 6px;
+            text-decoration: underline;
+            font-size: 13px;
+        }
+
+        /* Fields */
+        .field-line {
+            border-bottom: 1px solid black;
+            display: inline-block;
+            width: 65%;     /* reduced from full width to save space visually */
+            height: 16px;
+            vertical-align: middle;
+        }
+
+        /* Slot table */
+        .slot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            font-size: 11px;
+        }
+
+        .slot-table th,
+        .slot-table td {
+            border: 1px solid black;
+            padding: 5px;   /* reduced padding */
+            text-align: center;
+        }
+
+        .slot-table td { line-height: 1.1; }
+
+        .slot-list {
+            margin-left: 4px;
+            font-size: 11.5px;
+        }
+
+        /* Preference table */
+        .preference-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            font-size: 11px;
+        }
+
+        .preference-table th,
+        .preference-table td {
+            border: 1px solid black;
+            padding: 5px;   /* reduced padding */
+            text-align: center;
+        }
+
+        /* Signatures */
+        .signature-section {
+            margin-top: 28px; /* reduced */
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        /* Avoid page breaks inside tables */
+        table { page-break-inside: avoid; }
+        tr { page-break-inside: avoid; }
+
+        /* Smaller adjustments for print */
+        @media print {
+            body { padding: 6mm; font-size: 11px; }
+            h2 { font-size: 17px; }
+            .field-line { height: 14px; width: 62%; }
+            .slot-table th, .slot-table td, .preference-table th, .preference-table td { padding: 4px; font-size: 10.5px; }
+            .signature-section { margin-top: 18px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>IIITDM KURNOOL GYM ACCESS FORM</h2>
+
+    <div class="section-title">Personal Information:</div>
+
+    <p style="margin:4px 0;">Full Name: <span class="field-line"></span></p>
+    <p style="margin:4px 0;">Roll Number: <span class="field-line"></span></p>
+    <p style="margin:4px 0;">Contact Number: <span class="field-line"></span></p>
+    <p style="margin:4px 0;">Address (Hostel Name & Room Number for Hostellers):</p>
+    <p style="margin:4px 0;"><span class="field-line" style="height:36px;"></span></p>
+
+    <div class="section-title">Available GYM Slots:</div>
+
+    <table class="slot-table">
+        <tr>
+            <th>Slot Number</th>
+            <th>Time</th>
+            <th>Reserved By</th>
+        </tr>
+        <tr>
+            <td>Slot 1</td>
+            <td>4:30 AM - 5:30 AM</td>
+            <td>15 Inter IIIT indoor sport student</td>
+        </tr>
+        <tr>
+            <td>Slot 2</td>
+            <td>5:30 AM - 7:00 AM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 3</td>
+            <td>7:00 AM - 8:30 AM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 4</td>
+            <td>2:30 PM - 4:00 PM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 5</td>
+            <td>4:00 PM - 5:30 PM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 6</td>
+            <td>5:30 PM - 7:00 PM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 7</td>
+            <td>7:00 PM - 8:30 PM</td>
+            <td>15 Powerlifting Students</td>
+        </tr>
+        <tr>
+            <td>Slot 8</td>
+            <td>8:30 PM - 10:00 PM</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Slot 9</td>
+            <td>10:00 PM - 11:30 PM</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p style="margin:6px 0;"><i>*GYM Facility will be closed on Mondays and Public Holidays</i></p>
+
+    <div class="section-title">GYM SLOT PREFERENCES (Maximum of 35 members per slot)</div>
+
+    <table class="preference-table">
+        <tr>
+            <th>Preference No.</th>
+            <th>Slot Preference</th>
+            <th>Allotted Slot (To be filled by Incharge)</th>
+        </tr>
+        <tr>
+            <td>Preference 1</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Preference 2</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Preference 3</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p style="margin:8px 0 2px 0;">Amount Paid (In Words): <span class="field-line"></span></p>
+    <p style="margin:4px 0 0 0;">Unique Transaction Reference Number (UTR No): <span class="field-line"></span></p>
+
+    <div class="signature-section">
+        <div>
+            _________________________<br>
+            Student Signature
         </div>
-        
-        <!-- Header -->
-        <div style="background: linear-gradient(135deg, #004080, #0099cc, #17a2b8); color: white; padding: 30px; text-align: center;">
-            <div style="font-family: 'Montserrat', Arial, sans-serif; font-size: 2.5rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                Gym Access Results & Registration
-            </div>
-            <div style="margin: 10px 0 0; font-size: 1.2rem;">
-                19 January 2026 - 19 February 2026
-            </div>
-            <div style="text-align: center; margin: 20px 0; font-size: 2rem;">
-                🏋️‍♂️ 💪 🏃‍♀️ 🏆
-            </div>
-        </div>
-        
-        <!-- Content -->
-        <div style="padding: 30px;">
-            <div style="margin-bottom: 20px;">
-                I hope you are doing well. This is to inform you that the Gym Access Application Process for the period 19 January 2026 - 19 February 2026 has been completed. The slot allocations have been finalized and verified.
-            </div>
 
-            <!-- Important Notice -->
-            <div style="background-color: #1a2a6c; color: white; text-align: center; padding: 15px; margin: 20px 0; border-radius: 5px; font-size: 1.2rem; font-weight: bold;">
-                ⚠️ IMPORTANT: REGISTRATION BEGINS TOMORROW (January 21) AT 5:30 AM ⚠️
-            </div>
-            <!-- Registration Details -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Registration Information
-                </div>
-                <ul style="padding-left: 20px;">
-                    <li><strong>Registration Timing:</strong> Registration will begin January 20 at 5:30 AM onwards. Please arrive in the presence of the gym trainer and gym coordinators.</li>
-                    <li><strong>No Extensions:</strong> There will be NO extensions to the registration period.</li>
-                    <li><strong>Allocation Verification:</strong> All slot allocation data is correct and verified. If you still have any doubts, please contact the gym trainer during operational hours.</li>
-                    <li><strong>Special Cases:</strong> Those who did not receive any slots and girls who still wish to register can meet the gym trainer tomorrow to discuss possible arrangements.</li>
-                    <li><strong>ID Card Requirement:</strong> Students must carry their ID cards for registration and daily gym access.</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Confirmation & Payment Rules
-                </div>
-                <div style="background-color: #fef0f0; border-left: 4px solid #b21f1f; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                    <div style="color: #b21f1f; margin-top: 0; font-size: 1.2rem; font-weight: bold;">Important Notes:</div>
-                    <ul style="padding-left: 20px;">
-                        <li>The first 35 per category selected names will receive a confirmation email.</li>
-                        <li>Only those with their names on the final list will be allowed to pay and access the gym.</li>
-                        <li>Payment must be made at the gym in the presence of the trainer and Powerlifting Team Captain Indu Shekhar.</li>
-                        <li>Payments made without proper acknowledgement will not be valid.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Gym Etiquette -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Gym Etiquette & Guidelines
-                </div>
-                <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px;">
-                    <p>To ensure a positive and productive gym environment for everyone, please follow these guidelines:</p>
-                    <ul style="padding-left: 20px;">
-                        <li><strong>Respect Equipment:</strong> Please return weights to their proper places after use.</li>
-                        <li><strong>Wipe Down Equipment:</strong> Clean equipment after use for hygiene purposes.</li>
-                        <li><strong>Share Equipment:</strong> Allow others to work in during your rest periods for busy equipment.</li>
-                        <li><strong>Time Management:</strong> Adhere strictly to your allotted time slot.</li>
-                        <li><strong>Dress Appropriately:</strong> Wear proper workout attire and closed-toe athletic shoes.</li>
-                        <li><strong>Queue Management:</strong> Maintain discipline while entering the gym.</li>
-                        <li><strong>ID Card:</strong> Always carry your ID card for verification.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Registration and Payment -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Registration and Payment Details
-                </div>
-                <div>
-                    Registration and payment will start TODAY (December 20) from 6:00 PM, in the presence of the gym trainer and gym coordinators. Only those students listed in the designated slots are required to come to the gym with their ID cards to complete their registration and payments to confirm their slots. The remaining students will not be allowed to use the gym.
-                </div>
-            </div>
-
-            <!-- Payment Details -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Payment Details
-                </div>
-                <div style="background-color: #fef0f0; border-left: 4px solid #b21f1f; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                    <div style="color: #b21f1f; margin-top: 0; font-size: 1.2rem; font-weight: bold;">Payment Information:</div>
-                    <ul style="padding-left: 20px;">
-                        <li><strong>Fee:</strong> ₹200 per month</li>
-                        <li>Payment must be made at the gym in the presence of the trainer and Powerlifting Team Captain Indu Shekhar.</li>
-                        <li>Payments made without proper acknowledgement will not be valid.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Motivational Message -->
-            <div style="margin-bottom: 25px; text-align: center; padding: 20px; background: linear-gradient(135deg, #fff7e6, #ffebcc); border-radius: 8px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; font-size: 1.3rem; font-weight: bold; margin-bottom: 15px;">
-                    Your Fitness Journey Continues!
-                </div>
-                <div style="font-style: italic; color: #333;">
-                    "The difference between the impossible and the possible lies in determination."
-                </div>
-                <div style="margin-top: 15px;">
-                    Remember, consistency is key to progress. We're excited to support you in achieving your fitness goals during this period. Stay motivated, challenge yourself, and embrace the journey ahead!
-                </div>
-            </div>
-
-            <!-- Contact Information -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <div style="font-family: 'Montserrat', Arial, sans-serif; color: #1a2a6c; position: relative; padding-left: 15px; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #b21f1f;">
-                    Contact Information
-                </div>
-                <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px;">
-                    <div><strong>Gym Coordinators:</strong></div>
-                    <ul style="padding-left: 20px;">
-                        <li>Indu Shekhar Jha (122cs0076): 8521750940</li>
-                        <li>Jatin Patil (123ad0032): 8999465621</li>
-                    </ul>
-
-                    <div><strong>Gym Trainer:</strong> Available at the gym during operational hours</div>
-                    <div><strong>Powerlifting Team Captain:</strong> Indu Shekhar Jha</div>
-                </div>
-            </div>
-
-            <!-- Thank You Message -->
-            <div>
-                I sincerely thank everyone for their support and cooperation throughout this application process. I appreciate your patience and understanding, and look forward to seeing you at the gym!
-            </div>
-
-            <!-- Signature -->
-            <div style="margin-top: 30px;">
-                Best regards,<br>
-                <strong>Jatin Patil</strong><br>
-                Powerlifting Coordinator<br>
-                IIITDM Kurnool
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div style="background-color: #1a2a6c; color: white; text-align: center; padding: 20px; font-size: 0.9rem;">
-            © 2025 IIITDM Kurnool Gym | Designed for official gym communications
+        <div>
+            _________________________<br>
+            Signature of Faculty In-charge (Games and Sports)
         </div>
     </div>
-</div>
+
+</body>
+
+</html>
