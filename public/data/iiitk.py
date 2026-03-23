@@ -54,4 +54,4 @@ def allocate_slots(input_csv, output_csv):
             writer.writerow(row)
 
 
-allocate_slots("GymAccessApplication(Responses-Feb-Mar).csv", "results-new.csv")
+allocate_slots("GymAccessApplication_MainResponses.csv", "results-new.csv")
