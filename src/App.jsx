@@ -182,7 +182,7 @@ export default function GymAllocationResults({ csvPath = "/data/results-new.csv"
     URL.revokeObjectURL(url);
   };
 
-  // badge classes for up to 9 slots
+  // badge classes for up to 8 slots
   function slotBadgeClass(slot) {
     if (!slot) return "bg-gray-200 text-gray-800";
     const upper = slot.toUpperCase();
@@ -194,21 +194,19 @@ export default function GymAllocationResults({ csvPath = "/data/results-new.csv"
     if (upper.includes("SLOT 6")) return "bg-amber-100 text-amber-800 border border-amber-300";
     if (upper.includes("SLOT 7")) return "bg-pink-100 text-pink-800 border border-pink-300";
     if (upper.includes("SLOT 8")) return "bg-sky-100 text-sky-800 border border-sky-300";
-    if (upper.includes("SLOT 9")) return "bg-lime-100 text-lime-800 border border-lime-300";
     return "bg-gray-100 text-gray-800 border border-gray-300";
   }
 
-  // definitive slot info for the UI (9 slots)
+  // definitive slot info for the UI (8 slots)
   const slotInfo = [
-    { num: 1, time: "4:30 AM - 5:30 AM", color: "yellow" },
-    { num: 2, time: "5:30 AM - 7:00 AM", color: "cyan" },
-    { num: 3, time: "7:00 AM - 8:30 AM", color: "green" },
-    { num: 4, time: "2:30 PM - 4:00 PM", color: "red" },
-    { num: 5, time: "4:00 PM - 5:30 PM", color: "purple" },
-    { num: 6, time: "5:30 PM - 7:00 PM", color: "amber" },
-    { num: 7, time: "7:00 PM - 8:30 PM", color: "pink" },
-    { num: 8, time: "8:30 PM - 10:00 PM", color: "sky" },
-    { num: 9, time: "10:00 PM - 11:30 PM", color: "lime" },
+    { num: 1, time: "5:45 AM - 7:15 AM", color: "yellow" },
+    { num: 2, time: "7:15 AM - 8:45 AM", color: "cyan" },
+    { num: 3, time: "2:30 PM - 4:00 PM", color: "green" },
+    { num: 4, time: "4:00 PM - 5:30 PM", color: "red" },
+    { num: 5, time: "5:30 PM - 7:00 PM", color: "purple" },
+    { num: 6, time: "7:00 PM - 8:30 PM", color: "amber" },
+    { num: 7, time: "8:30 PM - 10:00 PM", color: "pink" },
+    { num: 8, time: "10:00 PM - 11:30 PM", color: "sky" },
   ];
 
   return (
@@ -223,7 +221,7 @@ export default function GymAllocationResults({ csvPath = "/data/results-new.csv"
             </div>
             <div className="flex items-center gap-2 text-sm opacity-90">
               <Calendar className="w-4 h-4" />
-              <p>January - February 2026 | Successfully Allocated Students</p>
+              <p>July - August 2026 | Successfully Allocated Students</p>
             </div>
           </div>
 
