@@ -4,14 +4,15 @@ def allocate_slots(input_csv, output_csv):
 
     # --- Slot capacities (EDIT ONLY HERE) ---
     capacity = {
-        "SLOT 1 (5:45 AM TO 7:15 AM)": 35,
-        "SLOT 2 (7:15 AM TO 8:45 AM)": 35,
-        "SLOT 3 (2:30 PM TO 4:00 PM)": 35,
-        "SLOT 4 (4:00PM TO 5:30 PM)": 35,
-        "SLOT 5 (5:30 PM TO 7:00 PM)": 20,
-        "SLOT 6 (7:00 PM TO 8:30 PM)": 35,
-        "SLOT 7 (8:30 PM TO 10:00 PM)": 35,
-        "SLOT 8 (10:00PM TO 11:30 PM)": 35,
+        "SLOT 1 (4:30 AM TO 5:30 AM)": 35,
+        "SLOT 2 (5:30 AM TO 7:00 AM)": 35,
+        "SLOT 2 (7:00 AM TO 8:30 AM)": 35,        
+        "SLOT 4 (2:30 PM TO 4:00 PM)": 35,
+        "SLOT 5 (4:00 PM TO 5:30 PM)": 35,
+        "SLOT 6 (5:30 PM TO 7:00 PM)": 35,
+        "SLOT 7 (7:00 PM TO 8:30 PM)": 20,
+        "SLOT 8 (8:30 PM TO 10:00 PM)": 35,
+        "SLOT 9 (10:00 PM TO 11:30 PM)": 35,
         
     }
 
