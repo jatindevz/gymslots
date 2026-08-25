@@ -19,6 +19,7 @@ import {
   UserCheck,
   Zap,
   X,
+  CheckCircle2,
 } from "lucide-react";
 
 /**
@@ -26,21 +27,22 @@ import {
  * GYM ALLOCATION RESULTS
  * ============================================================
  *
- * Updated Gym Slot Schedule - August 2026
+ * UPDATED 9-SLOT GYM SCHEDULE
  *
- * Slot 1  → 4:30 AM  - 5:30 AM
- * Slot 2  → 5:30 AM  - 7:00 AM
- * Slot 3  → 7:00 AM  - 8:30 AM
- * Slot 4  → 2:30 PM  - 4:00 PM
- * Slot 5  → 4:00 PM  - 5:30 PM
- * Slot 6  → 5:30 PM  - 7:00 PM
- * Slot 7  → 7:00 PM  - 8:30 PM
- * Slot 8  → 8:30 PM  - 10:00 PM
- * Slot 9  → 10:00 PM - 11:30 PM
+ * Slot 1 → 4:30 AM  - 5:30 AM
+ * Slot 2 → 5:30 AM  - 7:00 AM
+ * Slot 3 → 7:00 AM  - 8:30 AM
+ * Slot 4 → 2:30 PM  - 4:00 PM
+ * Slot 5 → 4:00 PM  - 5:30 PM
+ * Slot 6 → 5:30 PM  - 7:00 PM
+ * Slot 7 → 7:00 PM  - 8:30 PM
+ * Slot 8 → 8:30 PM  - 10:00 PM
+ * Slot 9 → 10:00 PM - 11:30 PM
  *
- * Slot 7:
- * 20 available
- * 15 reserved for Powerlifting Students
+ * Clicking a slot card automatically filters
+ * the table to that slot.
+ *
+ * Clicking the selected slot again clears the filter.
  *
  * ============================================================
  */
@@ -51,9 +53,9 @@ export default function GymAllocationResults({
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [slotFilter, setSlotFilter] = useState("");
-  const [durationFilter, setDurationFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
 
@@ -140,14 +142,14 @@ export default function GymAllocationResults({
     setError(null);
 
     fetch(csvPath)
-      .then((r) => {
-        if (!r.ok) {
+      .then((response) => {
+        if (!response.ok) {
           throw new Error(
-            `Failed to fetch CSV (status ${r.status})`
+            `Failed to fetch CSV (status ${response.status})`
           );
         }
 
-        return r.text();
+        return response.text();
       })
 
       .then((text) => {
@@ -166,36 +168,48 @@ export default function GymAllocationResults({
         }
 
         const rows = parsed.data
-          .map((r) => {
-            const findKey = (rowObj, candidates = []) => {
-              const norm = (s) =>
-                String(s || "")
+          .map((row) => {
+            const findKey = (
+              rowObject,
+              candidates = []
+            ) => {
+              const normalize = (value) =>
+                String(value || "")
                   .replace(/\s+/g, "")
                   .toLowerCase();
 
-              const keys = Object.keys(rowObj);
+              const keys = Object.keys(rowObject);
 
               // Exact match
-              for (const cand of candidates) {
-                for (const k of keys) {
-                  if (norm(k) === norm(cand)) {
-                    return k;
+              for (const candidate of candidates) {
+                for (const key of keys) {
+                  if (
+                    normalize(key) ===
+                    normalize(candidate)
+                  ) {
+                    return key;
                   }
                 }
               }
 
               // Partial match
-              for (const k of keys) {
-                const nk = norm(k);
+              for (const key of keys) {
+                const normalizedKey =
+                  normalize(key);
 
-                for (const cand of candidates) {
-                  const cleanCandidate = norm(cand).replace(
-                    /[^a-z0-9]/g,
-                    ""
-                  );
+                for (const candidate of candidates) {
+                  const normalizedCandidate =
+                    normalize(candidate).replace(
+                      /[^a-z0-9]/g,
+                      ""
+                    );
 
-                  if (nk.includes(cleanCandidate)) {
-                    return k;
+                  if (
+                    normalizedKey.includes(
+                      normalizedCandidate
+                    )
+                  ) {
+                    return key;
                   }
                 }
               }
@@ -203,14 +217,14 @@ export default function GymAllocationResults({
               return null;
             };
 
-            const nameKey = findKey(r, [
+            const nameKey = findKey(row, [
               "FullName",
               "Full Name",
               "Name",
               "FULLNAME",
             ]);
 
-            const rollKey = findKey(r, [
+            const rollKey = findKey(row, [
               "RollNumber",
               "Roll Number",
               "Roll",
@@ -218,18 +232,13 @@ export default function GymAllocationResults({
               "ROLL",
             ]);
 
-            const emailKey = findKey(r, [
+            const emailKey = findKey(row, [
               "Email",
               "E-mail",
               "EMAIL",
             ]);
 
-            const durationKey = findKey(r, [
-              "Duration",
-              "DURATION",
-            ]);
-
-            const slotKey = findKey(r, [
+            const slotKey = findKey(row, [
               "Allocated Slot",
               "AllocatedSlot",
               "Allocated",
@@ -241,27 +250,26 @@ export default function GymAllocationResults({
             const safe = (key) => {
               if (!key) return "";
 
-              const val = r[key];
+              const value = row[key];
 
-              return val == null
+              return value == null
                 ? ""
-                : String(val).trim();
+                : String(value).trim();
             };
 
             return {
               name: safe(nameKey),
               roll: safe(rollKey),
               email: safe(emailKey),
-              duration: safe(durationKey),
               slot: safe(slotKey),
             };
           })
 
           .filter(
-            (s) =>
-              s.name ||
-              s.roll ||
-              s.email
+            (student) =>
+              student.name ||
+              student.roll ||
+              student.email
           );
 
         if (!cancelled) {
@@ -283,7 +291,7 @@ export default function GymAllocationResults({
   }, [csvPath]);
 
   // ============================================================
-  // SLOT NUMBER EXTRACTOR
+  // GET SLOT NUMBER
   // ============================================================
 
   const getSlotNumber = (slot) => {
@@ -299,14 +307,20 @@ export default function GymAllocationResults({
   };
 
   // ============================================================
-  // SLOT COUNTS
+  // COUNT MEMBERS IN EACH SLOT
   // ============================================================
 
   const slotCounts = useMemo(() => {
     const counts = {};
 
+    // Initialize all 9 slots with 0
+    slotInfo.forEach((slot) => {
+      counts[slot.num] = 0;
+    });
+
     students.forEach((student) => {
-      const slotNumber = getSlotNumber(student.slot);
+      const slotNumber =
+        getSlotNumber(student.slot);
 
       if (slotNumber) {
         counts[slotNumber] =
@@ -318,33 +332,13 @@ export default function GymAllocationResults({
   }, [students]);
 
   // ============================================================
-  // DURATION COUNTS
-  // ============================================================
-
-  const durationCounts = useMemo(() => {
-    const counts = {};
-
-    students.forEach((student) => {
-      const duration =
-        student.duration || "Unknown";
-
-      counts[duration] =
-        (counts[duration] || 0) + 1;
-    });
-
-    return counts;
-  }, [students]);
-
-  const durationOptions = Object.keys(
-    durationCounts
-  );
-
-  // ============================================================
-  // TOTAL ACTIVE SLOTS
+  // ACTIVE SLOTS
   // ============================================================
 
   const activeSlots = useMemo(() => {
-    return Object.keys(slotCounts).length;
+    return Object.values(slotCounts).filter(
+      (count) => count > 0
+    ).length;
   }, [slotCounts]);
 
   // ============================================================
@@ -371,27 +365,26 @@ export default function GymAllocationResults({
   }, [slotCounts]);
 
   // ============================================================
-  // SEARCH + FILTER
+  // FILTER + SEARCH + SORT
   // ============================================================
 
   const sortedAndFiltered = useMemo(() => {
-    const q = search
-      .trim()
-      .toLowerCase();
+    const query =
+      search.trim().toLowerCase();
 
     let result = students.filter(
       (student) => {
         const matchesSearch =
-          !q ||
+          !query ||
           (student.name || "")
             .toLowerCase()
-            .includes(q) ||
+            .includes(query) ||
           (student.roll || "")
             .toLowerCase()
-            .includes(q) ||
+            .includes(query) ||
           (student.email || "")
             .toLowerCase()
-            .includes(q);
+            .includes(query);
 
         const matchesSlot =
           !slotFilter ||
@@ -400,41 +393,38 @@ export default function GymAllocationResults({
               slotFilter.replace("SLOT ", "")
             );
 
-        const matchesDuration =
-          !durationFilter ||
-          (student.duration || "") ===
-            durationFilter;
-
         return (
           matchesSearch &&
-          matchesSlot &&
-          matchesDuration
+          matchesSlot
         );
       }
     );
 
     result.sort((a, b) => {
-      let aVal = a[sortBy] || "";
-      let bVal = b[sortBy] || "";
+      let aValue = a[sortBy] || "";
+      let bValue = b[sortBy] || "";
 
       if (sortBy === "slot") {
-        aVal =
-          getSlotNumber(aVal) ?? 999;
+        aValue =
+          getSlotNumber(aValue) ?? 999;
 
-        bVal =
-          getSlotNumber(bVal) ?? 999;
+        bValue =
+          getSlotNumber(bValue) ?? 999;
       } else {
-        aVal = String(aVal).toLowerCase();
-        bVal = String(bVal).toLowerCase();
+        aValue =
+          String(aValue).toLowerCase();
+
+        bValue =
+          String(bValue).toLowerCase();
       }
 
-      if (aVal < bVal) {
+      if (aValue < bValue) {
         return sortOrder === "asc"
           ? -1
           : 1;
       }
 
-      if (aVal > bVal) {
+      if (aValue > bValue) {
         return sortOrder === "asc"
           ? 1
           : -1;
@@ -448,27 +438,39 @@ export default function GymAllocationResults({
     students,
     search,
     slotFilter,
-    durationFilter,
     sortBy,
     sortOrder,
   ]);
 
   // ============================================================
-  // SORT
+  // CLICK SLOT CARD
   // ============================================================
 
-  const handleSort = (column) => {
-    if (sortBy === column) {
-      setSortOrder((order) =>
-        order === "asc"
-          ? "desc"
-          : "asc"
-      );
+  const handleSlotClick = (slotNumber) => {
+    const selectedSlot =
+      `SLOT ${slotNumber}`;
+
+    // Clicking the already selected slot
+    // clears the selection.
+    if (slotFilter === selectedSlot) {
+      setSlotFilter("");
     } else {
-      setSortBy(column);
-      setSortOrder("asc");
+      setSlotFilter(selectedSlot);
     }
   };
+
+  // ============================================================
+  // CLEAR ALL FILTERS
+  // ============================================================
+
+  const clearFilters = () => {
+    setSearch("");
+    setSlotFilter("");
+  };
+
+  const hasFilters =
+    Boolean(search) ||
+    Boolean(slotFilter);
 
   // ============================================================
   // DOWNLOAD CSV
@@ -490,39 +492,24 @@ export default function GymAllocationResults({
     const url =
       URL.createObjectURL(blob);
 
-    const a =
+    const link =
       document.createElement("a");
 
-    a.href = url;
+    link.href = url;
 
-    a.download =
+    link.download =
       `gym-allocation-${new Date()
         .toISOString()
         .split("T")[0]}.csv`;
 
-    document.body.appendChild(a);
+    document.body.appendChild(link);
 
-    a.click();
+    link.click();
 
-    document.body.removeChild(a);
+    document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
   };
-
-  // ============================================================
-  // CLEAR FILTERS
-  // ============================================================
-
-  const clearFilters = () => {
-    setSearch("");
-    setSlotFilter("");
-    setDurationFilter("");
-  };
-
-  const hasFilters =
-    search ||
-    slotFilter ||
-    durationFilter;
 
   // ============================================================
   // SLOT BADGE COLORS
@@ -560,27 +547,35 @@ export default function GymAllocationResults({
   }
 
   // ============================================================
-  // SLOT CARD COLOR
+  // SLOT CARD COLORS
   // ============================================================
 
   function slotCardClass(color) {
     const colors = {
       yellow:
         "from-yellow-50 to-orange-50 border-yellow-200 hover:border-yellow-400",
+
       cyan:
         "from-cyan-50 to-blue-50 border-cyan-200 hover:border-cyan-400",
+
       green:
         "from-green-50 to-emerald-50 border-green-200 hover:border-green-400",
+
       red:
         "from-red-50 to-orange-50 border-red-200 hover:border-red-400",
+
       purple:
         "from-purple-50 to-fuchsia-50 border-purple-200 hover:border-purple-400",
+
       amber:
         "from-amber-50 to-yellow-50 border-amber-200 hover:border-amber-400",
+
       pink:
         "from-pink-50 to-rose-50 border-pink-200 hover:border-pink-400",
+
       sky:
         "from-sky-50 to-blue-50 border-sky-200 hover:border-sky-400",
+
       indigo:
         "from-indigo-50 to-violet-50 border-indigo-200 hover:border-indigo-400",
     };
@@ -616,72 +611,171 @@ export default function GymAllocationResults({
   // ============================================================
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 p-3 md:p-6 lg:p-8 relative overflow-hidden">
+    <div
+      className="
+        min-h-screen
+        bg-gradient-to-br
+        from-slate-950
+        via-indigo-950
+        to-purple-950
+        p-3 md:p-6 lg:p-8
+        relative
+        overflow-hidden
+      "
+    >
 
       {/* ======================================================
-          DECORATIVE BACKGROUND
+          BACKGROUND EFFECTS
       ====================================================== */}
 
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
-
       <div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse pointer-events-none"
-        style={{
-          animationDelay: "1.5s",
-        }}
+        className="
+          absolute
+          top-0
+          left-0
+          w-96
+          h-96
+          bg-purple-500/20
+          rounded-full
+          blur-3xl
+          animate-pulse
+          pointer-events-none
+        "
       />
 
       <div
-        className="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"
+        className="
+          absolute
+          bottom-0
+          right-0
+          w-96
+          h-96
+          bg-cyan-500/20
+          rounded-full
+          blur-3xl
+          animate-pulse
+          pointer-events-none
+        "
         style={{
-          animationDelay: "2s",
+          animationDelay: "1.5s",
         }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* ====================================================
-            MAIN CARD
+            MAIN CONTAINER
         ==================================================== */}
 
-        <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/30">
+        <div
+          className="
+            bg-white/95
+            backdrop-blur-xl
+            rounded-3xl
+            shadow-2xl
+            overflow-hidden
+            border
+            border-white/30
+          "
+        >
 
           {/* ==================================================
               HERO HEADER
           ================================================== */}
 
-          <div className="relative overflow-hidden bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 text-white">
+          <div
+            className="
+              relative
+              overflow-hidden
+              bg-gradient-to-r
+              from-indigo-700
+              via-purple-700
+              to-pink-600
+              text-white
+            "
+          >
 
-            {/* Decorative circles */}
+            <div
+              className="
+                absolute
+                -right-20
+                -top-24
+                w-72
+                h-72
+                rounded-full
+                bg-white/10
+                blur-sm
+              "
+            />
 
-            <div className="absolute -right-20 -top-24 w-72 h-72 rounded-full bg-white/10 blur-sm" />
+            <div
+              className="
+                absolute
+                right-24
+                bottom-[-100px]
+                w-56
+                h-56
+                rounded-full
+                bg-white/10
+              "
+            />
 
-            <div className="absolute right-24 bottom-[-100px] w-56 h-56 rounded-full bg-white/10" />
-
-            <div className="absolute left-1/2 top-5 opacity-10">
+            <div
+              className="
+                absolute
+                left-1/2
+                top-5
+                opacity-10
+              "
+            >
               <Dumbbell
                 size={170}
                 strokeWidth={1}
               />
             </div>
 
-            <div className="relative px-6 md:px-10 py-8 md:py-10">
+            <div
+              className="
+                relative
+                px-6
+                md:px-10
+                py-8
+                md:py-10
+              "
+            >
 
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div
+                className="
+                  flex
+                  flex-col
+                  md:flex-row
+                  md:items-center
+                  md:justify-between
+                  gap-6
+                "
+              >
 
-                {/* Title */}
+                {/* TITLE */}
 
                 <div>
 
                   <div className="flex items-center gap-3 mb-3">
 
-                    <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-md border border-white/20 shadow-lg">
-
+                    <div
+                      className="
+                        p-3
+                        rounded-2xl
+                        bg-white/15
+                        backdrop-blur-md
+                        border
+                        border-white/20
+                        shadow-lg
+                      "
+                    >
                       <Dumbbell
                         size={32}
                         className="animate-pulse"
                       />
-
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -691,7 +785,15 @@ export default function GymAllocationResults({
                         className="text-yellow-300"
                       />
 
-                      <span className="text-sm font-semibold uppercase tracking-widest text-white/80">
+                      <span
+                        className="
+                          text-sm
+                          font-semibold
+                          uppercase
+                          tracking-widest
+                          text-white/80
+                        "
+                      >
                         Fitness Management
                       </span>
 
@@ -699,58 +801,113 @@ export default function GymAllocationResults({
 
                   </div>
 
-                  <h1 className="text-3xl md:text-5xl font-black tracking-tight">
-
+                  <h1
+                    className="
+                      text-3xl
+                      md:text-5xl
+                      font-black
+                      tracking-tight
+                    "
+                  >
                     GYM Slot Allocation
-
                   </h1>
 
-                  <p className="mt-3 text-white/80 flex items-center gap-2">
-
+                  <p
+                    className="
+                      mt-3
+                      text-white/80
+                      flex
+                      items-center
+                      gap-2
+                    "
+                  >
                     <Calendar size={17} />
 
                     August 2026 • Updated Slot Schedule
-
                   </p>
 
                 </div>
 
-                {/* Hero Stats */}
+                {/* HERO STATS */}
 
                 <div className="flex items-center gap-3">
 
-                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 min-w-[120px]">
+                  <div
+                    className="
+                      bg-white/10
+                      backdrop-blur-md
+                      border
+                      border-white/20
+                      rounded-2xl
+                      px-5
+                      py-4
+                      min-w-[120px]
+                    "
+                  >
 
-                    <div className="flex items-center gap-2 text-white/70 text-xs font-semibold uppercase">
-
-                      <Activity size={14} />
-
-                      Students
-
+                    <div
+                      className="
+                        flex
+                        items-center
+                        gap-2
+                        text-white/70
+                        text-xs
+                        font-semibold
+                        uppercase
+                      "
+                    >
+                      <Users size={14} />
+                      Members
                     </div>
 
-                    <div className="text-3xl font-black mt-1">
-
+                    <div
+                      className="
+                        text-3xl
+                        font-black
+                        mt-1
+                      "
+                    >
                       {students.length}
-
                     </div>
 
                   </div>
 
-                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 min-w-[120px]">
+                  <div
+                    className="
+                      bg-white/10
+                      backdrop-blur-md
+                      border
+                      border-white/20
+                      rounded-2xl
+                      px-5
+                      py-4
+                      min-w-[120px]
+                    "
+                  >
 
-                    <div className="flex items-center gap-2 text-white/70 text-xs font-semibold uppercase">
-
+                    <div
+                      className="
+                        flex
+                        items-center
+                        gap-2
+                        text-white/70
+                        text-xs
+                        font-semibold
+                        uppercase
+                      "
+                    >
                       <Clock size={14} />
-
                       Slots
-
                     </div>
 
-                    <div className="text-3xl font-black mt-1">
-
+                    <div
+                      className="
+                        text-3xl
+                        font-black
+                        mt-1
+                      "
+                    >
                       9
-
                     </div>
 
                   </div>
@@ -760,135 +917,283 @@ export default function GymAllocationResults({
               </div>
 
             </div>
+
           </div>
 
           {/* ==================================================
-              QUICK STATISTICS
+              QUICK STATS
           ================================================== */}
 
-          <div className="p-5 md:p-7 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+          <div
+            className="
+              p-5
+              md:p-7
+              bg-gradient-to-b
+              from-slate-50
+              to-white
+              border-b
+              border-slate-200
+            "
+          >
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div
+              className="
+                grid
+                grid-cols-2
+                md:grid-cols-4
+                gap-4
+              "
+            >
 
-              {/* Total */}
+              {/* TOTAL */}
 
-              <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl p-5 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div
+                className="
+                  group
+                  relative
+                  overflow-hidden
+                  bg-gradient-to-br
+                  from-indigo-600
+                  to-purple-700
+                  text-white
+                  rounded-2xl
+                  p-5
+                  shadow-lg
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  transition-all
+                  duration-300
+                "
+              >
 
-                <div className="absolute -right-5 -bottom-5 opacity-10">
-
+                <div
+                  className="
+                    absolute
+                    -right-5
+                    -bottom-5
+                    opacity-10
+                  "
+                >
                   <Users size={90} />
-
                 </div>
 
                 <div className="relative">
 
-                  <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
-
+                  <div
+                    className="
+                      text-sm
+                      opacity-80
+                      font-medium
+                      flex
+                      items-center
+                      gap-2
+                    "
+                  >
                     <Users size={17} />
-
-                    Total Students
-
+                    Total Members
                   </div>
 
-                  <div className="text-3xl md:text-4xl font-black mt-2">
-
+                  <div
+                    className="
+                      text-3xl
+                      md:text-4xl
+                      font-black
+                      mt-2
+                    "
+                  >
                     {students.length}
-
                   </div>
 
                 </div>
 
               </div>
 
-              {/* Active Slots */}
+              {/* ACTIVE SLOTS */}
 
-              <div className="group relative overflow-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div
+                className="
+                  group
+                  relative
+                  overflow-hidden
+                  bg-white
+                  border
+                  border-slate-200
+                  rounded-2xl
+                  p-5
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  transition-all
+                  duration-300
+                "
+              >
 
-                <div className="absolute -right-5 -bottom-5 opacity-5">
-
-                  <Zap size={90} />
-
-                </div>
-
-                <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-slate-500
+                    text-sm
+                    font-medium
+                  "
+                >
                   <Zap size={17} />
-
                   Active Slots
-
                 </div>
 
-                <div className="text-3xl md:text-4xl font-black text-slate-800 mt-2">
-
+                <div
+                  className="
+                    text-3xl
+                    md:text-4xl
+                    font-black
+                    text-slate-800
+                    mt-2
+                  "
+                >
                   {activeSlots}
 
-                  <span className="text-base text-slate-400 font-semibold">
+                  <span
+                    className="
+                      text-base
+                      text-slate-400
+                      font-semibold
+                    "
+                  >
                     {" "}
                     / 9
                   </span>
-
                 </div>
 
               </div>
 
-              {/* Popular */}
+              {/* MOST POPULAR */}
 
-              <div className="group relative overflow-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div
+                className="
+                  group
+                  relative
+                  overflow-hidden
+                  bg-white
+                  border
+                  border-slate-200
+                  rounded-2xl
+                  p-5
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  transition-all
+                  duration-300
+                "
+              >
 
-                <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-slate-500
+                    text-sm
+                    font-medium
+                  "
+                >
                   <Trophy size={17} />
-
                   Popular Slot
-
                 </div>
 
-                <div className="text-3xl md:text-4xl font-black text-slate-800 mt-2">
-
+                <div
+                  className="
+                    text-3xl
+                    md:text-4xl
+                    font-black
+                    text-slate-800
+                    mt-2
+                  "
+                >
                   {mostPopularSlot.slot
                     ? `#${mostPopularSlot.slot}`
                     : "--"}
-
                 </div>
 
-                <div className="text-xs text-slate-400 mt-1">
-
-                  {mostPopularSlot.count} students
-
+                <div
+                  className="
+                    text-xs
+                    text-slate-400
+                    mt-1
+                  "
+                >
+                  {mostPopularSlot.count} members
                 </div>
 
               </div>
 
-              {/* Powerlifting */}
+              {/* SLOT 7 */}
 
-              <div className="group relative overflow-hidden bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-5 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <div
+                className="
+                  group
+                  relative
+                  overflow-hidden
+                  bg-gradient-to-br
+                  from-pink-500
+                  to-rose-600
+                  text-white
+                  rounded-2xl
+                  p-5
+                  shadow-lg
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  transition-all
+                  duration-300
+                "
+              >
 
-                <div className="absolute -right-5 -bottom-5 opacity-10">
-
+                <div
+                  className="
+                    absolute
+                    -right-5
+                    -bottom-5
+                    opacity-10
+                  "
+                >
                   <Dumbbell size={90} />
-
                 </div>
 
                 <div className="relative">
 
-                  <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
-
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      text-white/80
+                      text-sm
+                      font-medium
+                    "
+                  >
                     <Flame size={17} />
-
-                    Slot 7 Reserved
-
+                    Slot 7
                   </div>
 
-                  <div className="text-3xl md:text-4xl font-black mt-2">
-
-                    15
-
+                  <div
+                    className="
+                      text-3xl
+                      md:text-4xl
+                      font-black
+                      mt-2
+                    "
+                  >
+                    {slotCounts[7] || 0}
                   </div>
 
-                  <div className="text-xs text-white/70 mt-1">
-
-                    Powerlifting Students
-
+                  <div
+                    className="
+                      text-xs
+                      text-white/70
+                      mt-1
+                    "
+                  >
+                    Current members
                   </div>
 
                 </div>
@@ -905,7 +1210,17 @@ export default function GymAllocationResults({
 
           <div className="px-5 md:px-7 pt-7">
 
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
+            <div
+              className="
+                flex
+                flex-col
+                md:flex-row
+                md:items-end
+                md:justify-between
+                gap-3
+                mb-5
+              "
+            >
 
               <div>
 
@@ -916,33 +1231,92 @@ export default function GymAllocationResults({
                     size={22}
                   />
 
-                  <h2 className="text-xl md:text-2xl font-black text-slate-800">
-
+                  <h2
+                    className="
+                      text-xl
+                      md:text-2xl
+                      font-black
+                      text-slate-800
+                    "
+                  >
                     Gym Slot Schedule
-
                   </h2>
 
                 </div>
 
-                <p className="text-sm text-slate-500 mt-1">
-
-                  Updated timings for all 9 gym sessions
-
+                <p
+                  className="
+                    text-sm
+                    text-slate-500
+                    mt-1
+                  "
+                >
+                  Click any slot to view its members
                 </p>
 
               </div>
 
-              <div className="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-2 rounded-full">
+              {/* Selected slot indicator */}
 
-                9 Sessions Available
+              {slotFilter ? (
+                <button
+                  onClick={() =>
+                    setSlotFilter("")
+                  }
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-xs
+                    font-bold
+                    text-indigo-600
+                    bg-indigo-50
+                    hover:bg-indigo-100
+                    px-3
+                    py-2
+                    rounded-full
+                    transition-colors
+                  "
+                >
+                  <CheckCircle2 size={14} />
 
-              </div>
+                  Viewing{" "}
+                  {slotFilter}
+
+                  <X size={14} />
+
+                </button>
+              ) : (
+                <div
+                  className="
+                    text-xs
+                    font-semibold
+                    text-slate-500
+                    bg-slate-100
+                    px-3
+                    py-2
+                    rounded-full
+                  "
+                >
+                  9 Sessions Available
+                </div>
+              )}
 
             </div>
 
-            {/* Slot Cards */}
+            {/* ==================================================
+                CLICKABLE SLOT CARDS
+            ================================================== */}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div
+              className="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                gap-3
+              "
+            >
 
               {slotInfo.map(
                 ({
@@ -952,87 +1326,280 @@ export default function GymAllocationResults({
                   color,
                   icon,
                   available,
-                  reserved,
-                }) => (
-                  <div
-                    key={num}
-                    className={`
-                      relative overflow-hidden
-                      bg-gradient-to-br
-                      ${slotCardClass(color)}
-                      border rounded-2xl
-                      p-4
-                      transition-all duration-300
-                      hover:-translate-y-1
-                      hover:shadow-lg
-                      cursor-pointer
-                    `}
-                  >
+                }) => {
+                  const memberCount =
+                    slotCounts[num] || 0;
 
-                    {/* Glow */}
+                  const isSelected =
+                    slotFilter ===
+                    `SLOT ${num}`;
 
-                    <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/60 blur-xl" />
+                  return (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() =>
+                        handleSlotClick(num)
+                      }
+                      className={`
+                        group
+                        relative
+                        overflow-hidden
+                        text-left
+                        bg-gradient-to-br
+                        ${slotCardClass(color)}
+                        border
+                        rounded-2xl
+                        p-4
+                        transition-all
+                        duration-300
+                        cursor-pointer
+                        focus:outline-none
+                        focus:ring-4
+                        focus:ring-indigo-500/20
 
-                    <div className="relative flex items-center justify-between">
+                        ${
+                          isSelected
+                            ? `
+                              ring-4
+                              ring-indigo-500/30
+                              border-indigo-500
+                              shadow-xl
+                              -translate-y-1
+                            `
+                            : `
+                              hover:-translate-y-1
+                              hover:shadow-lg
+                            `
+                        }
+                      `}
+                    >
 
-                      <div className="flex items-center gap-3">
+                      {/* Selected indicator */}
 
-                        <div className="w-11 h-11 rounded-xl bg-white/80 shadow-sm flex items-center justify-center text-xl">
+                      {isSelected && (
+                        <div
+                          className="
+                            absolute
+                            top-0
+                            left-0
+                            right-0
+                            h-1
+                            bg-gradient-to-r
+                            from-indigo-500
+                            via-purple-500
+                            to-pink-500
+                          "
+                        />
+                      )}
 
-                          {icon}
+                      {/* Background glow */}
 
-                        </div>
+                      <div
+                        className="
+                          absolute
+                          -right-8
+                          -top-8
+                          w-24
+                          h-24
+                          rounded-full
+                          bg-white/60
+                          blur-xl
+                          group-hover:scale-150
+                          transition-transform
+                          duration-500
+                        "
+                      />
 
-                        <div>
+                      <div
+                        className="
+                          relative
+                          flex
+                          items-center
+                          justify-between
+                          gap-3
+                        "
+                      >
 
-                          <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        {/* LEFT */}
 
-                            Slot {num}
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-3
+                            min-w-0
+                          "
+                        >
+
+                          <div
+                            className="
+                              w-12
+                              h-12
+                              flex-shrink-0
+                              rounded-xl
+                              bg-white/80
+                              shadow-sm
+                              flex
+                              items-center
+                              justify-center
+                              text-xl
+                              group-hover:scale-110
+                              transition-transform
+                              duration-300
+                            "
+                          >
+                            {icon}
+                          </div>
+
+                          <div className="min-w-0">
+
+                            <div
+                              className="
+                                text-xs
+                                font-bold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                              "
+                            >
+                              Slot {num}
+                            </div>
+
+                            <div
+                              className="
+                                font-black
+                                text-slate-800
+                                text-sm
+                                md:text-base
+                                whitespace-nowrap
+                              "
+                            >
+                              {shortTime}
+                            </div>
 
                           </div>
 
-                          <div className="font-black text-slate-800 text-base">
+                        </div>
 
-                            {shortTime}
+                        {/* MEMBER COUNT */}
 
-                          </div>
+                        <div
+                          className="
+                            flex-shrink-0
+                            flex
+                            flex-col
+                            items-center
+                            justify-center
+                            min-w-[62px]
+                            px-2
+                            py-2
+                            rounded-xl
+                            bg-white/80
+                            shadow-sm
+                          "
+                        >
+
+                          <Users
+                            size={16}
+                            className="
+                              text-indigo-600
+                              mb-0.5
+                            "
+                          />
+
+                          <span
+                            className="
+                              text-lg
+                              font-black
+                              text-slate-800
+                              leading-none
+                            "
+                          >
+                            {memberCount}
+                          </span>
+
+                          <span
+                            className="
+                              text-[9px]
+                              font-bold
+                              uppercase
+                              text-slate-400
+                            "
+                          >
+                            Members
+                          </span>
 
                         </div>
 
                       </div>
 
-                      <div className="text-xs font-black bg-white/80 rounded-full px-2.5 py-1 text-slate-600">
+                      {/* BOTTOM INFO */}
 
-                        #{num}
+                      <div
+                        className="
+                          relative
+                          mt-3
+                          pt-3
+                          border-t
+                          border-black/5
+                          flex
+                          items-center
+                          justify-between
+                        "
+                      >
+
+                        <span
+                          className="
+                            text-[11px]
+                            font-semibold
+                            text-slate-500
+                          "
+                        >
+                          {memberCount === 1
+                            ? "1 member allocated"
+                            : `${memberCount} members allocated`}
+                        </span>
+
+                        <span
+                          className="
+                            text-[10px]
+                            font-bold
+                            text-indigo-500
+                            opacity-0
+                            group-hover:opacity-100
+                            transition-opacity
+                          "
+                        >
+                          View →
+                        </span>
 
                       </div>
 
-                    </div>
+                      {/* Slot 7 special reservation */}
 
-                    {available && (
-                      <div className="relative mt-3 pt-3 border-t border-black/5 flex items-center justify-between text-xs">
+                      {num === 7 && (
+                        <div
+                          className="
+                            relative
+                            mt-2
+                            flex
+                            items-center
+                            gap-1
+                            text-[10px]
+                            font-bold
+                            text-pink-600
+                          "
+                        >
+                          <Trophy size={11} />
 
-                        <span className="font-semibold text-slate-600">
+                          15 Powerlifting Students Reserved
+                        </div>
+                      )}
 
-                          Available:{" "}
-
-                          <strong>
-                            {available}
-                          </strong>
-
-                        </span>
-
-                        <span className="text-pink-600 font-bold">
-
-                          Powerlifting
-
-                        </span>
-
-                      </div>
-                    )}
-
-                  </div>
-                )
+                    </button>
+                  );
+                }
               )}
 
             </div>
@@ -1040,34 +1607,61 @@ export default function GymAllocationResults({
           </div>
 
           {/* ==================================================
-              FILTER AREA
+              FILTER + SEARCH
           ================================================== */}
 
           <div className="p-5 md:p-7 mt-2">
 
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 md:p-5">
+            <div
+              className="
+                bg-slate-50
+                border
+                border-slate-200
+                rounded-2xl
+                p-4
+                md:p-5
+              "
+            >
 
-              <div className="flex flex-col lg:flex-row gap-3">
+              <div
+                className="
+                  flex
+                  flex-col
+                  lg:flex-row
+                  gap-3
+                "
+              >
 
-                {/* Search */}
+                {/* SEARCH */}
 
                 <div className="flex-1 relative">
 
                   <Search
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                    className="
+                      absolute
+                      left-4
+                      top-1/2
+                      -translate-y-1/2
+                      text-slate-400
+                    "
                     size={19}
                   />
 
                   <input
                     value={search}
-                    onChange={(e) =>
-                      setSearch(e.target.value)
+                    onChange={(event) =>
+                      setSearch(
+                        event.target.value
+                      )
                     }
                     className="
                       w-full
-                      pl-11 pr-4 py-3.5
+                      pl-11
+                      pr-4
+                      py-3.5
                       rounded-xl
-                      border border-slate-200
+                      border
+                      border-slate-200
                       bg-white
                       text-slate-800
                       placeholder:text-slate-400
@@ -1077,32 +1671,44 @@ export default function GymAllocationResults({
                       focus:outline-none
                       transition-all
                     "
-                    placeholder="Search name, roll number, or email..."
+                    placeholder="
+                      Search name, roll number, or email...
+                    "
                   />
 
                 </div>
 
-                {/* Slot Filter */}
+                {/* SLOT FILTER */}
 
                 <div className="relative">
 
                   <Filter
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                    className="
+                      absolute
+                      left-4
+                      top-1/2
+                      -translate-y-1/2
+                      text-slate-400
+                    "
                     size={17}
                   />
 
                   <select
                     value={slotFilter}
-                    onChange={(e) =>
+                    onChange={(event) =>
                       setSlotFilter(
-                        e.target.value
+                        event.target.value
                       )
                     }
                     className="
-                      w-full lg:w-60
-                      pl-11 pr-8 py-3.5
+                      w-full
+                      lg:w-64
+                      pl-11
+                      pr-8
+                      py-3.5
                       rounded-xl
-                      border border-slate-200
+                      border
+                      border-slate-200
                       bg-white
                       text-slate-700
                       focus:border-indigo-500
@@ -1126,7 +1732,8 @@ export default function GymAllocationResults({
                           key={num}
                           value={`SLOT ${num}`}
                         >
-                          Slot {num} • {time}
+                          Slot {num} • {time} •{" "}
+                          {slotCounts[num] || 0} members
                         </option>
                       )
                     )}
@@ -1135,59 +1742,18 @@ export default function GymAllocationResults({
 
                 </div>
 
-                {/* Duration */}
-
-                {durationOptions.length >
-                  0 && (
-                  <select
-                    value={durationFilter}
-                    onChange={(e) =>
-                      setDurationFilter(
-                        e.target.value
-                      )
-                    }
-                    className="
-                      w-full lg:w-52
-                      px-4 py-3.5
-                      rounded-xl
-                      border border-slate-200
-                      bg-white
-                      text-slate-700
-                      focus:border-indigo-500
-                      focus:ring-4
-                      focus:ring-indigo-500/10
-                      focus:outline-none
-                      cursor-pointer
-                    "
-                  >
-
-                    <option value="">
-                      All Durations
-                    </option>
-
-                    {durationOptions.map(
-                      (duration) => (
-                        <option
-                          key={duration}
-                          value={duration}
-                        >
-                          {duration}
-                        </option>
-                      )
-                    )}
-
-                  </select>
-                )}
-
-                {/* Clear */}
+                {/* CLEAR */}
 
                 {hasFilters && (
                   <button
                     onClick={clearFilters}
                     className="
-                      flex items-center
-                      justify-center gap-2
-                      px-5 py-3.5
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      px-5
+                      py-3.5
                       rounded-xl
                       bg-slate-200
                       hover:bg-slate-300
@@ -1196,15 +1762,12 @@ export default function GymAllocationResults({
                       transition-all
                     "
                   >
-
                     <X size={17} />
-
                     Clear
-
                   </button>
                 )}
 
-                {/* Download */}
+                {/* DOWNLOAD */}
 
                 <button
                   onClick={downloadCSV}
@@ -1213,9 +1776,12 @@ export default function GymAllocationResults({
                     0
                   }
                   className="
-                    flex items-center
-                    justify-center gap-2
-                    px-5 py-3.5
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    px-5
+                    py-3.5
                     rounded-xl
                     bg-gradient-to-r
                     from-indigo-600
@@ -1232,46 +1798,75 @@ export default function GymAllocationResults({
                     hover:-translate-y-0.5
                   "
                 >
-
                   <Download size={18} />
-
                   Export CSV
-
                 </button>
 
               </div>
 
-              {/* Result Count */}
+              {/* RESULT COUNT */}
 
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+              <div
+                className="
+                  mt-4
+                  flex
+                  flex-wrap
+                  items-center
+                  justify-between
+                  gap-2
+                "
+              >
 
-                <div className="text-sm text-slate-500">
+                <div
+                  className="
+                    text-sm
+                    text-slate-500
+                  "
+                >
 
                   Showing{" "}
 
-                  <span className="font-black text-indigo-600">
-
+                  <span
+                    className="
+                      font-black
+                      text-indigo-600
+                    "
+                  >
                     {sortedAndFiltered.length}
-
                   </span>{" "}
 
-                  of{" "}
+                  members
 
-                  <span className="font-semibold text-slate-700">
-
-                    {students.length}
-
-                  </span>{" "}
-
-                  students
+                  {slotFilter && (
+                    <>
+                      {" "}
+                      in{" "}
+                      <span
+                        className="
+                          font-bold
+                          text-indigo-600
+                        "
+                      >
+                        {slotFilter}
+                      </span>
+                    </>
+                  )}
 
                 </div>
 
                 {hasFilters && (
-                  <div className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full">
-
+                  <div
+                    className="
+                      text-xs
+                      font-semibold
+                      text-indigo-600
+                      bg-indigo-50
+                      px-3
+                      py-1.5
+                      rounded-full
+                    "
+                  >
                     Filters active
-
                   </div>
                 )}
 
@@ -1282,7 +1877,7 @@ export default function GymAllocationResults({
           </div>
 
           {/* ==================================================
-              TABLE
+              MEMBERS TABLE
           ================================================== */}
 
           <div className="overflow-x-auto">
@@ -1293,25 +1888,38 @@ export default function GymAllocationResults({
 
                 <div className="relative inline-flex">
 
-                  <div className="w-16 h-16 rounded-full border-4 border-indigo-100 border-t-indigo-600 animate-spin" />
+                  <div
+                    className="
+                      w-16
+                      h-16
+                      rounded-full
+                      border-4
+                      border-indigo-100
+                      border-t-indigo-600
+                      animate-spin
+                    "
+                  />
 
                   <Dumbbell
-                    className="absolute inset-0 m-auto text-indigo-600"
+                    className="
+                      absolute
+                      inset-0
+                      m-auto
+                      text-indigo-600
+                    "
                     size={25}
                   />
 
                 </div>
 
-                <p className="mt-5 text-slate-600 font-semibold">
-
+                <p
+                  className="
+                    mt-5
+                    text-slate-600
+                    font-semibold
+                  "
+                >
                   Loading gym allocation data...
-
-                </p>
-
-                <p className="text-xs text-slate-400 mt-1">
-
-                  Preparing your dashboard
-
                 </p>
 
               </div>
@@ -1320,22 +1928,41 @@ export default function GymAllocationResults({
 
               <div className="text-center py-24 px-6">
 
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-red-50 flex items-center justify-center text-3xl">
-
+                <div
+                  className="
+                    w-16
+                    h-16
+                    mx-auto
+                    rounded-2xl
+                    bg-red-50
+                    flex
+                    items-center
+                    justify-center
+                    text-3xl
+                  "
+                >
                   ⚠️
-
                 </div>
 
-                <p className="text-red-600 font-bold text-lg mt-4">
-
+                <p
+                  className="
+                    text-red-600
+                    font-bold
+                    text-lg
+                    mt-4
+                  "
+                >
                   Error loading data
-
                 </p>
 
-                <p className="text-slate-500 text-sm mt-2 max-w-lg mx-auto">
-
+                <p
+                  className="
+                    text-slate-500
+                    text-sm
+                    mt-2
+                  "
+                >
                   {error}
-
                 </p>
 
                 <button
@@ -1345,8 +1972,10 @@ export default function GymAllocationResults({
                   className="
                     mt-5
                     inline-flex
-                    items-center gap-2
-                    px-5 py-2.5
+                    items-center
+                    gap-2
+                    px-5
+                    py-2.5
                     rounded-xl
                     bg-red-600
                     hover:bg-red-700
@@ -1354,11 +1983,8 @@ export default function GymAllocationResults({
                     font-semibold
                   "
                 >
-
                   <RefreshCw size={16} />
-
                   Try Again
-
                 </button>
 
               </div>
@@ -1368,25 +1994,43 @@ export default function GymAllocationResults({
 
               <div className="text-center py-24 px-6">
 
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-slate-100 flex items-center justify-center">
-
+                <div
+                  className="
+                    w-16
+                    h-16
+                    mx-auto
+                    rounded-2xl
+                    bg-slate-100
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
                   <Search
                     size={28}
                     className="text-slate-400"
                   />
-
                 </div>
 
-                <p className="text-slate-700 font-bold text-lg mt-4">
-
-                  No students found
-
+                <p
+                  className="
+                    text-slate-700
+                    font-bold
+                    text-lg
+                    mt-4
+                  "
+                >
+                  No members found
                 </p>
 
-                <p className="text-slate-400 text-sm mt-2">
-
-                  Try adjusting your search or filters.
-
+                <p
+                  className="
+                    text-slate-400
+                    text-sm
+                    mt-2
+                  "
+                >
+                  There are no members matching this selection.
                 </p>
 
                 {hasFilters && (
@@ -1394,7 +2038,8 @@ export default function GymAllocationResults({
                     onClick={clearFilters}
                     className="
                       mt-5
-                      px-5 py-2.5
+                      px-5
+                      py-2.5
                       rounded-xl
                       bg-indigo-600
                       hover:bg-indigo-700
@@ -1402,7 +2047,7 @@ export default function GymAllocationResults({
                       font-semibold
                     "
                   >
-                    Clear Filters
+                    Show All Members
                   </button>
                 )}
 
@@ -1412,22 +2057,34 @@ export default function GymAllocationResults({
 
               <table className="min-w-full">
 
-                {/* TABLE HEADER */}
+                {/* ==================================================
+                    TABLE HEADER
+                ================================================== */}
 
-                <thead className="
-                  bg-gradient-to-r
-                  from-slate-900
-                  via-indigo-900
-                  to-purple-900
-                  text-white
-                ">
+                <thead
+                  className="
+                    bg-gradient-to-r
+                    from-slate-900
+                    via-indigo-900
+                    to-purple-900
+                    text-white
+                  "
+                >
 
                   <tr>
 
-                    <th className="px-5 py-4 text-left text-xs uppercase tracking-wider font-bold">
-
+                    <th
+                      className="
+                        px-5
+                        py-4
+                        text-left
+                        text-xs
+                        uppercase
+                        tracking-wider
+                        font-bold
+                      "
+                    >
                       #
-
                     </th>
 
                     <th
@@ -1435,7 +2092,8 @@ export default function GymAllocationResults({
                         handleSort("name")
                       }
                       className="
-                        px-5 py-4
+                        px-5
+                        py-4
                         text-left
                         text-xs
                         uppercase
@@ -1447,11 +2105,8 @@ export default function GymAllocationResults({
                         whitespace-nowrap
                       "
                     >
-
                       Name{" "}
-
                       <SortIcon column="name" />
-
                     </th>
 
                     <th
@@ -1459,7 +2114,8 @@ export default function GymAllocationResults({
                         handleSort("roll")
                       }
                       className="
-                        px-5 py-4
+                        px-5
+                        py-4
                         text-left
                         text-xs
                         uppercase
@@ -1471,24 +2127,22 @@ export default function GymAllocationResults({
                         whitespace-nowrap
                       "
                     >
-
                       Roll Number{" "}
-
                       <SortIcon column="roll" />
-
                     </th>
 
-                    <th className="
-                      px-5 py-4
-                      text-left
-                      text-xs
-                      uppercase
-                      tracking-wider
-                      font-bold
-                    ">
-
+                    <th
+                      className="
+                        px-5
+                        py-4
+                        text-left
+                        text-xs
+                        uppercase
+                        tracking-wider
+                        font-bold
+                      "
+                    >
                       Email
-
                     </th>
 
                     <th
@@ -1496,7 +2150,8 @@ export default function GymAllocationResults({
                         handleSort("slot")
                       }
                       className="
-                        px-5 py-4
+                        px-5
+                        py-4
                         text-left
                         text-xs
                         uppercase
@@ -1508,37 +2163,28 @@ export default function GymAllocationResults({
                         whitespace-nowrap
                       "
                     >
-
                       Gym Slot{" "}
-
                       <SortIcon column="slot" />
-
-                    </th>
-
-                    <th className="
-                      px-5 py-4
-                      text-left
-                      text-xs
-                      uppercase
-                      tracking-wider
-                      font-bold
-                    ">
-
-                      Duration
-
                     </th>
 
                   </tr>
 
                 </thead>
 
-                {/* TABLE BODY */}
+                {/* ==================================================
+                    TABLE BODY
+                ================================================== */}
 
-                <tbody className="bg-white divide-y divide-slate-100">
+                <tbody
+                  className="
+                    bg-white
+                    divide-y
+                    divide-slate-100
+                  "
+                >
 
                   {sortedAndFiltered.map(
-                    (student, idx) => {
-
+                    (student, index) => {
                       const slotNumber =
                         getSlotNumber(
                           student.slot
@@ -1555,8 +2201,8 @@ export default function GymAllocationResults({
                         <tr
                           key={`${
                             student.roll ||
-                            idx
-                          }-${idx}`}
+                            index
+                          }-${index}`}
                           className="
                             group
                             hover:bg-gradient-to-r
@@ -1567,76 +2213,95 @@ export default function GymAllocationResults({
                           "
                         >
 
-                          {/* Number */}
+                          {/* NUMBER */}
 
                           <td className="px-5 py-4">
 
-                            <div className="
-                              w-8 h-8
-                              rounded-lg
-                              bg-slate-100
-                              group-hover:bg-indigo-100
-                              flex items-center
-                              justify-center
-                              text-xs
-                              font-bold
-                              text-slate-500
-                              group-hover:text-indigo-600
-                              transition-colors
-                            ">
-
-                              {idx + 1}
-
+                            <div
+                              className="
+                                w-8
+                                h-8
+                                rounded-lg
+                                bg-slate-100
+                                group-hover:bg-indigo-100
+                                flex
+                                items-center
+                                justify-center
+                                text-xs
+                                font-bold
+                                text-slate-500
+                                group-hover:text-indigo-600
+                                transition-colors
+                              "
+                            >
+                              {index + 1}
                             </div>
 
                           </td>
 
-                          {/* Name */}
+                          {/* NAME */}
 
                           <td className="px-5 py-4">
 
-                            <div className="flex items-center gap-3">
+                            <div
+                              className="
+                                flex
+                                items-center
+                                gap-3
+                              "
+                            >
 
-                              <div className="
-                                w-9 h-9
-                                rounded-xl
-                                bg-gradient-to-br
-                                from-indigo-500
-                                to-purple-600
-                                text-white
-                                flex items-center
-                                justify-center
-                                text-sm
-                                font-black
-                                shadow-sm
-                              ">
-
+                              <div
+                                className="
+                                  w-9
+                                  h-9
+                                  rounded-xl
+                                  bg-gradient-to-br
+                                  from-indigo-500
+                                  to-purple-600
+                                  text-white
+                                  flex
+                                  items-center
+                                  justify-center
+                                  text-sm
+                                  font-black
+                                  shadow-sm
+                                "
+                              >
                                 {(
                                   student.name ||
                                   "?"
                                 )
                                   .charAt(0)
                                   .toUpperCase()}
-
                               </div>
 
                               <div>
 
-                                <div className="font-bold text-slate-800">
-
+                                <div
+                                  className="
+                                    font-bold
+                                    text-slate-800
+                                  "
+                                >
                                   {student.name ||
                                     "Unnamed"}
-
                                 </div>
 
-                                <div className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-
+                                <div
+                                  className="
+                                    text-xs
+                                    text-slate-400
+                                    flex
+                                    items-center
+                                    gap-1
+                                    mt-0.5
+                                  "
+                                >
                                   <UserCheck
                                     size={11}
                                   />
-
                                   Gym Member
-
                                 </div>
 
                               </div>
@@ -1645,53 +2310,68 @@ export default function GymAllocationResults({
 
                           </td>
 
-                          {/* Roll */}
+                          {/* ROLL */}
 
                           <td className="px-5 py-4">
 
-                            <span className="
-                              inline-flex
-                              px-2.5 py-1
-                              rounded-lg
-                              bg-slate-100
-                              text-slate-700
-                              font-mono
-                              text-xs
-                              font-semibold
-                            ">
-
+                            <span
+                              className="
+                                inline-flex
+                                px-2.5
+                                py-1
+                                rounded-lg
+                                bg-slate-100
+                                text-slate-700
+                                font-mono
+                                text-xs
+                                font-semibold
+                              "
+                            >
                               {student.roll ||
                                 "—"}
-
                             </span>
 
                           </td>
 
-                          {/* Email */}
+                          {/* EMAIL */}
 
                           <td className="px-5 py-4">
 
-                            <div className="
-                              text-sm
-                              text-slate-600
-                              max-w-[260px]
-                              truncate
-                            ">
-
+                            <div
+                              className="
+                                text-sm
+                                text-slate-600
+                                max-w-[300px]
+                                truncate
+                              "
+                            >
                               {student.email ||
                                 "—"}
-
                             </div>
 
                           </td>
 
-                          {/* Slot */}
+                          {/* SLOT */}
 
                           <td className="px-5 py-4">
 
-                            <div className="flex flex-col items-start gap-1.5">
+                            <div
+                              className="
+                                flex
+                                flex-col
+                                items-start
+                                gap-1.5
+                              "
+                            >
 
-                              <span
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  slotNumber &&
+                                  handleSlotClick(
+                                    slotNumber
+                                  )
+                                }
                                 className={`
                                   inline-flex
                                   items-center
@@ -1702,6 +2382,8 @@ export default function GymAllocationResults({
                                   border
                                   text-xs
                                   font-black
+                                  hover:scale-105
+                                  transition-transform
                                   ${slotBadgeClass(
                                     student.slot
                                   )}
@@ -1715,47 +2397,22 @@ export default function GymAllocationResults({
                                 {student.slot ||
                                   "Unassigned"}
 
-                              </span>
+                              </button>
 
                               {slot && (
-                                <span className="text-[11px] text-slate-400 font-medium ml-1">
-
+                                <span
+                                  className="
+                                    text-[11px]
+                                    text-slate-400
+                                    font-medium
+                                    ml-1
+                                  "
+                                >
                                   {slot.shortTime}
-
                                 </span>
                               )}
 
                             </div>
-
-                          </td>
-
-                          {/* Duration */}
-
-                          <td className="px-5 py-4">
-
-                            <span className="
-                              inline-flex
-                              items-center
-                              gap-1.5
-                              text-xs
-                              font-semibold
-                              text-slate-600
-                              bg-slate-50
-                              border
-                              border-slate-200
-                              rounded-lg
-                              px-2.5
-                              py-1.5
-                            ">
-
-                              <Calendar
-                                size={12}
-                              />
-
-                              {student.duration ||
-                                "—"}
-
-                            </span>
 
                           </td>
 
@@ -1767,6 +2424,7 @@ export default function GymAllocationResults({
                 </tbody>
 
               </table>
+
             )}
 
           </div>
@@ -1775,82 +2433,176 @@ export default function GymAllocationResults({
               BOTTOM INFORMATION
           ================================================== */}
 
-          <div className="border-t border-slate-200 bg-slate-50 px-5 md:px-7 py-5">
+          <div
+            className="
+              border-t
+              border-slate-200
+              bg-slate-50
+              px-5
+              md:px-7
+              py-5
+            "
+          >
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div
+              className="
+                grid
+                grid-cols-1
+                md:grid-cols-3
+                gap-4
+              "
+            >
 
-              <div className="flex items-center gap-3">
+              {/* SESSIONS */}
 
-                <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
 
+                <div
+                  className="
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-indigo-100
+                    text-indigo-600
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
                   <Dumbbell size={19} />
-
                 </div>
 
                 <div>
 
-                  <div className="text-xs text-slate-400 font-semibold uppercase">
-
+                  <div
+                    className="
+                      text-xs
+                      text-slate-400
+                      font-semibold
+                      uppercase
+                    "
+                  >
                     Gym Sessions
-
                   </div>
 
-                  <div className="text-sm font-bold text-slate-700">
-
+                  <div
+                    className="
+                      text-sm
+                      font-bold
+                      text-slate-700
+                    "
+                  >
                     9 Daily Slots
-
                   </div>
 
                 </div>
 
               </div>
 
-              <div className="flex items-center gap-3">
+              {/* POWERLIFTING */}
 
-                <div className="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center">
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
 
+                <div
+                  className="
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-pink-100
+                    text-pink-600
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
                   <Trophy size={19} />
-
                 </div>
 
                 <div>
 
-                  <div className="text-xs text-slate-400 font-semibold uppercase">
-
+                  <div
+                    className="
+                      text-xs
+                      text-slate-400
+                      font-semibold
+                      uppercase
+                    "
+                  >
                     Special Reservation
-
                   </div>
 
-                  <div className="text-sm font-bold text-slate-700">
-
+                  <div
+                    className="
+                      text-sm
+                      font-bold
+                      text-slate-700
+                    "
+                  >
                     Slot 7 • Powerlifting
-
                   </div>
 
                 </div>
 
               </div>
 
-              <div className="flex items-center gap-3">
+              {/* STATUS */}
 
-                <div className="w-10 h-10 rounded-xl bg-green-100 text-green-600 flex items-center justify-center">
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
 
+                <div
+                  className="
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-green-100
+                    text-green-600
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
                   <Activity size={19} />
-
                 </div>
 
                 <div>
 
-                  <div className="text-xs text-slate-400 font-semibold uppercase">
-
+                  <div
+                    className="
+                      text-xs
+                      text-slate-400
+                      font-semibold
+                      uppercase
+                    "
+                  >
                     Status
-
                   </div>
 
-                  <div className="text-sm font-bold text-green-600">
-
+                  <div
+                    className="
+                      text-sm
+                      font-bold
+                      text-green-600
+                    "
+                  >
                     Allocation Active
-
                   </div>
 
                 </div>
@@ -1867,19 +2619,32 @@ export default function GymAllocationResults({
             FOOTER
         ==================================================== */}
 
-        <footer className="
-          mt-5
-          rounded-2xl
-          bg-white/10
-          backdrop-blur-md
-          border
-          border-white/10
-          px-5
-          py-4
-          text-center
-        ">
+        <footer
+          className="
+            mt-5
+            rounded-2xl
+            bg-white/10
+            backdrop-blur-md
+            border
+            border-white/10
+            px-5
+            py-4
+            text-center
+          "
+        >
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 text-xs text-white/50">
+          <div
+            className="
+              flex
+              flex-col
+              md:flex-row
+              items-center
+              justify-center
+              gap-2
+              text-xs
+              text-white/50
+            "
+          >
 
             <span>
               GYM Allocation Dashboard
@@ -1906,6 +2671,7 @@ export default function GymAllocationResults({
         </footer>
 
       </div>
+
     </div>
   );
 }
