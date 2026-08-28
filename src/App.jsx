@@ -12,9 +12,6 @@ import {
   Sparkles,
   ChevronUp,
   ChevronDown,
-  Trophy,
-  Flame,
-  Zap,
   X,
   CheckCircle2,
   Lock,
@@ -28,6 +25,8 @@ import {
   Square,
   AlertCircle,
   HelpCircle,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 /**
@@ -53,6 +52,7 @@ export default function GymAllocationResults({
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminInputKey, setAdminInputKey] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [adminAuthError, setAdminAuthError] = useState("");
 
   // Modal for Add / Edit
@@ -102,6 +102,15 @@ export default function GymAllocationResults({
     if (match) return `SLOT ${parseInt(match[1], 10)}`;
     
     return val;
+  };
+
+  // Helper function to get full detailed label including timing
+  const getSlotDisplayLabel = (slotValue) => {
+    const normalized = getNormalizedSlot(slotValue);
+    const category = slotCategories.find((cat) => cat.id === normalized);
+    if (!category) return normalized;
+    if (category.type === "special") return category.id;
+    return `${category.id} (${category.time})`;
   };
 
   // ============================================================
@@ -200,15 +209,17 @@ export default function GymAllocationResults({
   // ADMIN AUTHENTICATION
   // ============================================================
 
+  const isPasswordValid = adminInputKey === HARDCODED_ADMIN_KEY;
+
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    if (adminInputKey === HARDCODED_ADMIN_KEY) {
+    if (isPasswordValid) {
       setIsAdmin(true);
       setShowAdminModal(false);
       setAdminInputKey("");
       setAdminAuthError("");
     } else {
-      setAdminAuthError("Invalid Admin Key. Please try again.");
+      setAdminAuthError("Invalid Admin Key. Access denied.");
     }
   };
 
@@ -401,17 +412,17 @@ export default function GymAllocationResults({
     const number = match ? parseInt(match[1], 10) : null;
 
     const classes = {
-      1: "bg-yellow-50 text-yellow-700 border-yellow-300",
-      2: "bg-cyan-50 text-cyan-700 border-cyan-300",
-      3: "bg-green-50 text-green-700 border-green-300",
-      4: "bg-red-50 text-red-700 border-red-300",
-      5: "bg-purple-50 text-purple-700 border-purple-300",
-      6: "bg-amber-50 text-amber-700 border-amber-300",
-      7: "bg-pink-50 text-pink-700 border-pink-300",
-      8: "bg-sky-50 text-sky-700 border-sky-300",
-      9: "bg-indigo-50 text-indigo-700 border-indigo-300",
+      1: "bg-yellow-50 text-yellow-700 border-yellow-300 font-semibold",
+      2: "bg-cyan-50 text-cyan-700 border-cyan-300 font-semibold",
+      3: "bg-green-50 text-green-700 border-green-300 font-semibold",
+      4: "bg-red-50 text-red-700 border-red-300 font-semibold",
+      5: "bg-purple-50 text-purple-700 border-purple-300 font-semibold",
+      6: "bg-amber-50 text-amber-700 border-amber-300 font-semibold",
+      7: "bg-pink-50 text-pink-700 border-pink-300 font-semibold",
+      8: "bg-sky-50 text-sky-700 border-sky-300 font-semibold",
+      9: "bg-indigo-50 text-indigo-700 border-indigo-300 font-semibold",
     };
-    return classes[number] || "bg-gray-100 text-gray-700 border-gray-300";
+    return classes[number] || "bg-gray-100 text-gray-700 border-gray-300 font-semibold";
   }
 
   function slotCardClass(color) {
@@ -486,7 +497,11 @@ export default function GymAllocationResults({
                   </div>
                 ) : (
                   <button
-                    onClick={() => setShowAdminModal(true)}
+                    onClick={() => {
+                      setShowAdminModal(true);
+                      setAdminInputKey("");
+                      setAdminAuthError("");
+                    }}
                     className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold text-sm transition-all"
                   >
                     <Lock size={16} /> Admin Login
@@ -532,7 +547,7 @@ export default function GymAllocationResults({
             </div>
           </div>
 
-          {/* SINGLE LOOP FOR ALL CARDS (STANDARD SLOTS + SPECIAL STATUSES) */}
+          {/* SINGLE LOOP FOR ALL CARDS */}
           <div className="px-5 md:px-7 pt-7">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
               <div>
@@ -704,7 +719,7 @@ export default function GymAllocationResults({
                         <td className="px-5 py-4 text-sm text-slate-600">{student.email || "—"}</td>
                         <td className="px-5 py-4">
                           <span className={`inline-flex px-3 py-1.5 rounded-full border text-xs ${slotBadgeClass(student.slot)}`}>
-                            {getNormalizedSlot(student.slot)}
+                            {getSlotDisplayLabel(student.slot)}
                           </span>
                         </td>
                         {isAdmin && (
@@ -737,7 +752,7 @@ export default function GymAllocationResults({
         </div>
       </div>
 
-      {/* ADMIN AUTH MODAL */}
+      {/* ADMIN AUTH MODAL WITH EYE TOGGLE & DYNAMIC BUTTON VALIDATION */}
       {showAdminModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-slate-100">
@@ -753,16 +768,37 @@ export default function GymAllocationResults({
               {adminAuthError && <p className="text-red-500 text-xs font-bold">{adminAuthError}</p>}
               <div>
                 <label className="block text-xs font-bold text-slate-500 mb-1">ENTER ADMIN KEY</label>
-                <input
-                  type="password"
-                  value={adminInputKey}
-                  onChange={(e) => setAdminInputKey(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none"
-                  placeholder="Key"
-                  autoFocus
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={adminInputKey}
+                    onChange={(e) => {
+                      setAdminInputKey(e.target.value);
+                      if (adminAuthError) setAdminAuthError("");
+                    }}
+                    className="w-full pl-4 pr-11 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none text-slate-800 font-medium"
+                    placeholder="Enter key"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                    title={showPassword ? "Hide PIN" : "Show PIN"}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
-              <button type="submit" className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg">
+              <button
+                type="submit"
+                disabled={!isPasswordValid}
+                className={`w-full py-3.5 font-bold rounded-xl shadow-lg transition-all ${
+                  isPasswordValid
+                    ? "bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer"
+                    : "bg-slate-300 text-slate-500 cursor-not-allowed shadow-none"
+                }`}
+              >
                 Authenticate Admin
               </button>
             </form>
