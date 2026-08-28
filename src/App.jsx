@@ -9,24 +9,25 @@ import {
   Calendar,
   Clock,
   Dumbbell,
-  Activity,
-  Trophy,
-  Flame,
   Sparkles,
   ChevronUp,
   ChevronDown,
-  RefreshCw,
-  UserCheck,
+  Trophy,
+  Flame,
   Zap,
   X,
   CheckCircle2,
   Lock,
-  Unlock,
   Plus,
   Trash2,
   Edit2,
   LogOut,
   Save,
+  AlertTriangle,
+  CheckSquare,
+  Square,
+  AlertCircle,
+  HelpCircle,
 } from "lucide-react";
 
 /**
@@ -34,7 +35,7 @@ import {
  * CONFIGURATION & CONSTANTS
  * ============================================================
  */
-const HARDCODED_ADMIN_KEY = "admin123"; // Change this to your desired admin key/password
+const HARDCODED_ADMIN_KEY = "IIITDMK_Gym";
 
 export default function GymAllocationResults({
   csvPath = "/data/results-new.csv",
@@ -56,7 +57,7 @@ export default function GymAllocationResults({
 
   // Modal for Add / Edit
   const [showEntryModal, setShowEntryModal] = useState(false);
-  const [editingIndex, setEditingIndex] = useState(null); // null if adding new
+  const [editingIndex, setEditingIndex] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     roll: "",
@@ -64,17 +65,44 @@ export default function GymAllocationResults({
     slot: "SLOT 1",
   });
 
-  const slotInfo = [
-    { num: 1, time: "4:30 AM - 5:30 AM", shortTime: "4:30 – 5:30 AM", color: "yellow", icon: "🌅" },
-    { num: 2, time: "5:30 AM - 7:00 AM", shortTime: "5:30 – 7:00 AM", color: "cyan", icon: "☀️" },
-    { num: 3, time: "7:00 AM - 8:30 AM", shortTime: "7:00 – 8:30 AM", color: "green", icon: "💪" },
-    { num: 4, time: "2:30 PM - 4:00 PM", shortTime: "2:30 – 4:00 PM", color: "red", icon: "🏃" },
-    { num: 5, time: "4:00 PM - 5:30 PM", shortTime: "4:00 – 5:30 PM", color: "purple", icon: "🔥" },
-    { num: 6, time: "5:30 PM - 7:00 PM", shortTime: "5:30 – 7:00 PM", color: "amber", icon: "⚡" },
-    { num: 7, time: "7:00 PM - 8:30 PM", shortTime: "7:00 – 8:30 PM", color: "pink", icon: "🏆", available: 20, reserved: "15 Powerlifting Students" },
-    { num: 8, time: "8:30 PM - 10:00 PM", shortTime: "8:30 – 10:00 PM", color: "sky", icon: "🌙" },
-    { num: 9, time: "10:00 PM - 11:30 PM", shortTime: "10:00 – 11:30 PM", color: "indigo", icon: "🌃" },
+  // Custom Confirmation Dialog State
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState({
+    isOpen: false,
+    indicesToDelete: [],
+    title: "",
+    message: "",
+  });
+
+  // Multiple Selection State
+  const [selectedIndices, setSelectedIndices] = useState([]);
+
+  // All Slot Categories (Standard Slots + Special Categories in a Single Array)
+  const slotCategories = [
+    { id: "SLOT 1", num: 1, type: "standard", time: "4:30 AM - 5:30 AM", shortTime: "4:30 – 5:30 AM", color: "yellow", icon: "🌅" },
+    { id: "SLOT 2", num: 2, type: "standard", time: "5:30 AM - 7:00 AM", shortTime: "5:30 – 7:00 AM", color: "cyan", icon: "☀️" },
+    { id: "SLOT 3", num: 3, type: "standard", time: "7:00 AM - 8:30 AM", shortTime: "7:00 – 8:30 AM", color: "green", icon: "💪" },
+    { id: "SLOT 4", num: 4, type: "standard", time: "2:30 PM - 4:00 PM", shortTime: "2:30 – 4:00 PM", color: "red", icon: "🏃" },
+    { id: "SLOT 5", num: 5, type: "standard", time: "4:00 PM - 5:30 PM", shortTime: "4:00 – 5:30 PM", color: "purple", icon: "🔥" },
+    { id: "SLOT 6", num: 6, type: "standard", time: "5:30 PM - 7:00 PM", shortTime: "5:30 – 7:00 PM", color: "amber", icon: "⚡" },
+    { id: "SLOT 7", num: 7, type: "standard", time: "7:00 PM - 8:30 PM", shortTime: "7:00 – 8:30 PM", color: "pink", icon: "🏆" },
+    { id: "SLOT 8", num: 8, type: "standard", time: "8:30 PM - 10:00 PM", shortTime: "8:30 – 10:00 PM", color: "sky", icon: "🌙" },
+    { id: "SLOT 9", num: 9, type: "standard", time: "10:00 PM - 11:30 PM", shortTime: "10:00 – 11:30 PM", color: "indigo", icon: "🌃" },
+    { id: "Invalid email ID", type: "special", time: "Requires Email Correction", shortTime: "Invalid Email", color: "rose", icon: "⚠️" },
+    { id: "No slot allocated", type: "special", time: "Unassigned Students", shortTime: "Not Allocated", color: "slate", icon: "❓" },
   ];
+
+  // Helper function to normalize slot values
+  const getNormalizedSlot = (slotValue) => {
+    const val = String(slotValue || "").trim();
+    if (!val) return "No slot allocated";
+    if (val.toLowerCase().includes("invalid")) return "Invalid email ID";
+    if (val.toLowerCase().includes("no slot") || val.toLowerCase().includes("not allocated")) return "No slot allocated";
+    
+    const match = val.match(/SLOT\s*([0-9]{1,2})/i) || val.match(/\b([0-9]{1,2})\b/);
+    if (match) return `SLOT ${parseInt(match[1], 10)}`;
+    
+    return val;
+  };
 
   // ============================================================
   // LOAD DATA & LOCALSTORAGE SYNC
@@ -162,14 +190,14 @@ export default function GymAllocationResults({
     };
   }, [csvPath]);
 
-  // Sync state mutations to storage
   const updateDataState = (updatedList) => {
     setStudents(updatedList);
     localStorage.setItem("gym_allocation_data", JSON.stringify(updatedList));
+    setSelectedIndices([]);
   };
 
   // ============================================================
-  // ADMIN AUTHENTICATION HANDLERS
+  // ADMIN AUTHENTICATION
   // ============================================================
 
   const handleAdminLogin = (e) => {
@@ -186,10 +214,35 @@ export default function GymAllocationResults({
 
   const handleAdminLogout = () => {
     setIsAdmin(false);
+    setSelectedIndices([]);
   };
 
   // ============================================================
-  // CRUD OPERATIONS
+  // MULTI-SELECT HANDLERS
+  // ============================================================
+
+  const toggleSelectAll = (filteredItems) => {
+    const currentFilteredIndices = filteredItems.map((item) => item.originalIndex);
+    const allSelected = currentFilteredIndices.every((idx) => selectedIndices.includes(idx));
+
+    if (allSelected) {
+      setSelectedIndices(selectedIndices.filter((idx) => !currentFilteredIndices.includes(idx)));
+    } else {
+      const combined = Array.from(new Set([...selectedIndices, ...currentFilteredIndices]));
+      setSelectedIndices(combined);
+    }
+  };
+
+  const toggleSelectRow = (originalIndex) => {
+    if (selectedIndices.includes(originalIndex)) {
+      setSelectedIndices(selectedIndices.filter((idx) => idx !== originalIndex));
+    } else {
+      setSelectedIndices([...selectedIndices, originalIndex]);
+    }
+  };
+
+  // ============================================================
+  // CRUD OPERATIONS WITH CUSTOM MODAL
   // ============================================================
 
   const handleOpenAddModal = () => {
@@ -204,11 +257,30 @@ export default function GymAllocationResults({
     setShowEntryModal(true);
   };
 
-  const handleDeleteEntry = (originalIndex) => {
-    if (window.confirm("Are you sure you want to delete this member?")) {
-      const updated = students.filter((_, idx) => idx !== originalIndex);
-      updateDataState(updated);
-    }
+  const triggerSingleDelete = (originalIndex, name) => {
+    setDeleteConfirmModal({
+      isOpen: true,
+      indicesToDelete: [originalIndex],
+      title: "Delete Member",
+      message: `Are you sure you want to delete ${name || "this member"}?`,
+    });
+  };
+
+  const triggerBulkDelete = () => {
+    if (selectedIndices.length === 0) return;
+    setDeleteConfirmModal({
+      isOpen: true,
+      indicesToDelete: selectedIndices,
+      title: `Delete ${selectedIndices.length} Members`,
+      message: `Are you sure you want to delete these ${selectedIndices.length} selected members?`,
+    });
+  };
+
+  const executeDelete = () => {
+    const targets = deleteConfirmModal.indicesToDelete;
+    const updated = students.filter((_, idx) => !targets.includes(idx));
+    updateDataState(updated);
+    setDeleteConfirmModal({ isOpen: false, indicesToDelete: [], title: "", message: "" });
   };
 
   const handleSaveEntry = (e) => {
@@ -233,38 +305,26 @@ export default function GymAllocationResults({
   // HELPERS & COMPUTED DATA
   // ============================================================
 
-  const getSlotNumber = (slot) => {
-    const value = String(slot || "");
-    const match = value.match(/SLOT\s*([0-9]{1,2})/i) || value.match(/\b([0-9]{1,2})\b/);
-    return match ? parseInt(match[1], 10) : null;
-  };
-
-  const slotCounts = useMemo(() => {
+  const categoryCounts = useMemo(() => {
     const counts = {};
-    slotInfo.forEach((slot) => { counts[slot.num] = 0; });
+    slotCategories.forEach((cat) => { counts[cat.id] = 0; });
+    
     students.forEach((student) => {
-      const slotNumber = getSlotNumber(student.slot);
-      if (slotNumber) counts[slotNumber] = (counts[slotNumber] || 0) + 1;
+      const category = getNormalizedSlot(student.slot);
+      counts[category] = (counts[category] || 0) + 1;
     });
     return counts;
   }, [students]);
 
-  const activeSlots = useMemo(() => Object.values(slotCounts).filter((c) => c > 0).length, [slotCounts]);
-
-  const mostPopularSlot = useMemo(() => {
-    let bestSlot = null;
-    let highestCount = 0;
-    Object.entries(slotCounts).forEach(([slot, count]) => {
-      if (count > highestCount) {
-        highestCount = count;
-        bestSlot = slot;
-      }
-    });
-    return { slot: bestSlot, count: highestCount };
-  }, [slotCounts]);
+  const activeSlots = useMemo(() => {
+    return slotCategories
+      .filter((c) => c.type === "standard")
+      .filter((c) => (categoryCounts[c.id] || 0) > 0).length;
+  }, [categoryCounts]);
 
   const sortedAndFiltered = useMemo(() => {
     const query = search.trim().toLowerCase();
+
     let result = students.map((item, originalIndex) => ({ ...item, originalIndex })).filter((student) => {
       const matchesSearch =
         !query ||
@@ -272,9 +332,8 @@ export default function GymAllocationResults({
         (student.roll || "").toLowerCase().includes(query) ||
         (student.email || "").toLowerCase().includes(query);
 
-      const matchesSlot =
-        !slotFilter ||
-        getSlotNumber(student.slot) === Number(slotFilter.replace("SLOT ", ""));
+      const normalizedStudentSlot = getNormalizedSlot(student.slot);
+      const matchesSlot = !slotFilter || normalizedStudentSlot === slotFilter;
 
       return matchesSearch && matchesSlot;
     });
@@ -282,13 +341,15 @@ export default function GymAllocationResults({
     result.sort((a, b) => {
       let aValue = a[sortBy] || "";
       let bValue = b[sortBy] || "";
+      
       if (sortBy === "slot") {
-        aValue = getSlotNumber(aValue) ?? 999;
-        bValue = getSlotNumber(bValue) ?? 999;
+        aValue = getNormalizedSlot(aValue);
+        bValue = getNormalizedSlot(bValue);
       } else {
         aValue = String(aValue).toLowerCase();
         bValue = String(bValue).toLowerCase();
       }
+
       if (aValue < bValue) return sortOrder === "asc" ? -1 : 1;
       if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
       return 0;
@@ -306,9 +367,8 @@ export default function GymAllocationResults({
     }
   };
 
-  const handleSlotClick = (slotNumber) => {
-    const selectedSlot = `SLOT ${slotNumber}`;
-    setSlotFilter(slotFilter === selectedSlot ? "" : selectedSlot);
+  const handleCategoryClick = (categoryId) => {
+    setSlotFilter(slotFilter === categoryId ? "" : categoryId);
   };
 
   const clearFilters = () => {
@@ -333,7 +393,13 @@ export default function GymAllocationResults({
   };
 
   function slotBadgeClass(slot) {
-    const number = getSlotNumber(slot);
+    const category = getNormalizedSlot(slot);
+    if (category === "Invalid email ID") return "bg-red-100 text-red-700 border-red-300 font-bold";
+    if (category === "No slot allocated") return "bg-slate-100 text-slate-700 border-slate-300 font-bold";
+
+    const match = category.match(/SLOT\s*([0-9]{1,2})/i);
+    const number = match ? parseInt(match[1], 10) : null;
+
     const classes = {
       1: "bg-yellow-50 text-yellow-700 border-yellow-300",
       2: "bg-cyan-50 text-cyan-700 border-cyan-300",
@@ -359,6 +425,8 @@ export default function GymAllocationResults({
       pink: "from-pink-50 to-rose-50 border-pink-200 hover:border-pink-400",
       sky: "from-sky-50 to-blue-50 border-sky-200 hover:border-sky-400",
       indigo: "from-indigo-50 to-violet-50 border-indigo-200 hover:border-indigo-400",
+      rose: "from-rose-50 to-red-100 border-rose-300 hover:border-rose-400",
+      slate: "from-slate-100 to-gray-200 border-slate-300 hover:border-slate-400",
     };
     return colors[color] || "from-gray-50 to-white border-gray-200";
   }
@@ -367,6 +435,11 @@ export default function GymAllocationResults({
     if (sortBy !== column) return <span className="ml-1 opacity-50">↕</span>;
     return sortOrder === "asc" ? <ChevronUp className="inline w-4 h-4" /> : <ChevronDown className="inline w-4 h-4" />;
   };
+
+  const areAllFilteredSelected = useMemo(() => {
+    if (sortedAndFiltered.length === 0) return false;
+    return sortedAndFiltered.every((item) => selectedIndices.includes(item.originalIndex));
+  }, [sortedAndFiltered, selectedIndices]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 p-3 md:p-6 lg:p-8 relative overflow-hidden">
@@ -390,11 +463,11 @@ export default function GymAllocationResults({
                 </div>
                 <h1 className="text-3xl md:text-5xl font-black tracking-tight">GYM Slot Allocation</h1>
                 <p className="mt-3 text-white/80 flex items-center gap-2">
-                  <Calendar size={17} /> August 2026 • Updated Slot Schedule
+                  <Calendar size={17} /> August 2026 • Slot Dashboard
                 </p>
               </div>
 
-              {/* ACTION / ADMIN TOGGLE BUTTON */}
+              {/* ACTION / ADMIN TOGGLE */}
               <div className="flex items-center gap-3 flex-wrap">
                 {isAdmin ? (
                   <div className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 p-2 rounded-2xl">
@@ -428,7 +501,7 @@ export default function GymAllocationResults({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="relative overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl p-5 shadow-lg">
                 <div className="text-sm opacity-80 font-medium flex items-center gap-2">
-                  <Users size={17} /> Total Members
+                  <Users size={17} /> Total Registrations
                 </div>
                 <div className="text-3xl md:text-4xl font-black mt-2">{students.length}</div>
               </div>
@@ -442,65 +515,70 @@ export default function GymAllocationResults({
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                  <Trophy size={17} /> Popular Slot
+                  <AlertCircle size={17} className="text-rose-500" /> Invalid Emails
                 </div>
-                <div className="text-3xl md:text-4xl font-black text-slate-800 mt-2">
-                  {mostPopularSlot.slot ? `#${mostPopularSlot.slot}` : "--"}
+                <div className="text-3xl md:text-4xl font-black text-rose-600 mt-2">
+                  {categoryCounts["Invalid email ID"] || 0}
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-5 shadow-lg">
-                <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
-                  <Flame size={17} /> Slot 7
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                  <HelpCircle size={17} className="text-slate-500" /> Unallocated
                 </div>
-                <div className="text-3xl md:text-4xl font-black mt-2">{slotCounts[7] || 0}</div>
+                <div className="text-3xl md:text-4xl font-black text-slate-700 mt-2">
+                  {categoryCounts["No slot allocated"] || 0}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* SLOT SCHEDULE CARDS */}
+          {/* SINGLE LOOP FOR ALL CARDS (STANDARD SLOTS + SPECIAL STATUSES) */}
           <div className="px-5 md:px-7 pt-7">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
               <div>
                 <div className="flex items-center gap-2">
                   <Clock className="text-indigo-600" size={22} />
-                  <h2 className="text-xl md:text-2xl font-black text-slate-800">Gym Slot Schedule</h2>
+                  <h2 className="text-xl md:text-2xl font-black text-slate-800">Gym Allocation & Status Overview</h2>
                 </div>
-                <p className="text-sm text-slate-500 mt-1">Click any slot to view its members</p>
+                <p className="text-sm text-slate-500 mt-1">Click any category card to filter list members</p>
               </div>
               {slotFilter && (
                 <button
                   onClick={() => setSlotFilter("")}
-                  className="flex items-center gap-2 text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-full"
+                  className="flex items-center gap-2 text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-full border border-indigo-200"
                 >
-                  <CheckCircle2 size={14} /> Viewing {slotFilter} <X size={14} />
+                  <CheckCircle2 size={14} /> Viewing: {slotFilter} <X size={14} />
                 </button>
               )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {slotInfo.map(({ num, shortTime, color, icon }) => {
-                const memberCount = slotCounts[num] || 0;
-                const isSelected = slotFilter === `SLOT ${num}`;
+              {slotCategories.map((item) => {
+                const count = categoryCounts[item.id] || 0;
+                const isSelected = slotFilter === item.id;
                 return (
                   <button
-                    key={num}
+                    key={item.id}
                     type="button"
-                    onClick={() => handleSlotClick(num)}
-                    className={`relative overflow-hidden text-left bg-gradient-to-br ${slotCardClass(color)} border rounded-2xl p-4 transition-all ${
+                    onClick={() => handleCategoryClick(item.id)}
+                    className={`relative overflow-hidden text-left bg-gradient-to-br ${slotCardClass(item.color)} border rounded-2xl p-4 transition-all ${
                       isSelected ? "ring-4 ring-indigo-500/30 border-indigo-500 shadow-xl" : "hover:-translate-y-1 hover:shadow-lg"
                     }`}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-white/80 flex items-center justify-center text-xl">{icon}</div>
+                        <div className="w-12 h-12 rounded-xl bg-white/80 flex items-center justify-center text-xl shadow-sm">{item.icon}</div>
                         <div>
-                          <div className="text-xs font-bold uppercase text-slate-500">Slot {num}</div>
-                          <div className="font-black text-slate-800 text-sm md:text-base">{shortTime}</div>
+                          <div className="text-xs font-bold uppercase text-slate-500">
+                            {item.type === "standard" ? `Slot ${item.num}` : "Special Category"}
+                          </div>
+                          <div className="font-black text-slate-800 text-sm md:text-base">{item.shortTime}</div>
+                          <div className="text-xs text-slate-500">{item.time}</div>
                         </div>
                       </div>
-                      <div className="flex flex-col items-center justify-center min-w-[62px] px-2 py-2 rounded-xl bg-white/80">
+                      <div className="flex flex-col items-center justify-center min-w-[62px] px-2.5 py-2 rounded-xl bg-white/80 border border-black/5">
                         <Users size={16} className="text-indigo-600 mb-0.5" />
-                        <span className="text-lg font-black text-slate-800">{memberCount}</span>
+                        <span className="text-lg font-black text-slate-800">{count}</span>
                       </div>
                     </div>
                   </button>
@@ -530,10 +608,10 @@ export default function GymAllocationResults({
                     onChange={(e) => setSlotFilter(e.target.value)}
                     className="w-full lg:w-64 pl-11 pr-8 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 focus:border-indigo-500 focus:outline-none"
                   >
-                    <option value="">All Slots</option>
-                    {slotInfo.map(({ num, time }) => (
-                      <option key={num} value={`SLOT ${num}`}>
-                        Slot {num} • {time}
+                    <option value="">All Categories & Slots</option>
+                    {slotCategories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.id} ({categoryCounts[cat.id] || 0})
                       </option>
                     ))}
                   </select>
@@ -552,17 +630,44 @@ export default function GymAllocationResults({
             </div>
           </div>
 
+          {/* BULK ACTION BAR (ADMIN ONLY) */}
+          {isAdmin && selectedIndices.length > 0 && (
+            <div className="mx-5 md:mx-7 mb-4 p-4 rounded-2xl bg-red-500/10 border border-red-200 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-red-700 font-bold text-sm">
+                <CheckSquare size={18} />
+                <span>{selectedIndices.length} members selected</span>
+              </div>
+              <button
+                onClick={triggerBulkDelete}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-md transition-all"
+              >
+                <Trash2 size={16} /> Delete Selected
+              </button>
+            </div>
+          )}
+
           {/* MEMBERS DATA TABLE */}
           <div className="overflow-x-auto">
             {loading ? (
               <div className="text-center py-24">
                 <Dumbbell className="mx-auto text-indigo-600 animate-spin" size={32} />
-                <p className="mt-4 text-slate-600 font-semibold">Loading gym allocation data...</p>
+                <p className="mt-4 text-slate-600 font-semibold">Loading allocation data...</p>
               </div>
             ) : (
               <table className="min-w-full">
                 <thead className="bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-900 text-white">
                   <tr>
+                    {isAdmin && (
+                      <th className="px-4 py-4 text-center">
+                        <button
+                          type="button"
+                          onClick={() => toggleSelectAll(sortedAndFiltered)}
+                          className="text-white opacity-80 hover:opacity-100"
+                        >
+                          {areAllFilteredSelected ? <CheckSquare size={18} /> : <Square size={18} />}
+                        </button>
+                      </th>
+                    )}
                     <th className="px-5 py-4 text-left text-xs uppercase font-bold">#</th>
                     <th onClick={() => handleSort("name")} className="px-5 py-4 text-left text-xs uppercase font-bold cursor-pointer whitespace-nowrap">
                       Name <SortIcon column="name" />
@@ -572,45 +677,59 @@ export default function GymAllocationResults({
                     </th>
                     <th className="px-5 py-4 text-left text-xs uppercase font-bold">Email</th>
                     <th onClick={() => handleSort("slot")} className="px-5 py-4 text-left text-xs uppercase font-bold cursor-pointer whitespace-nowrap">
-                      Gym Slot <SortIcon column="slot" />
+                      Gym Slot / Status <SortIcon column="slot" />
                     </th>
                     {isAdmin && <th className="px-5 py-4 text-center text-xs uppercase font-bold">Admin Actions</th>}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-slate-100">
-                  {sortedAndFiltered.map((student, index) => (
-                    <tr key={index} className="hover:bg-indigo-50/50 transition-all">
-                      <td className="px-5 py-4 text-xs font-bold text-slate-500">{index + 1}</td>
-                      <td className="px-5 py-4 font-bold text-slate-800">{student.name || "Unnamed"}</td>
-                      <td className="px-5 py-4 font-mono text-xs text-slate-700">{student.roll || "—"}</td>
-                      <td className="px-5 py-4 text-sm text-slate-600">{student.email || "—"}</td>
-                      <td className="px-5 py-4">
-                        <span className={`inline-flex px-3 py-1.5 rounded-full border text-xs font-black ${slotBadgeClass(student.slot)}`}>
-                          {student.slot || "Unassigned"}
-                        </span>
-                      </td>
-                      {isAdmin && (
-                        <td className="px-5 py-4 text-center">
-                          <div className="flex items-center justify-center gap-2">
+                  {sortedAndFiltered.map((student, index) => {
+                    const isSelected = selectedIndices.includes(student.originalIndex);
+                    return (
+                      <tr key={index} className={`hover:bg-indigo-50/50 transition-all ${isSelected ? "bg-indigo-50/80" : ""}`}>
+                        {isAdmin && (
+                          <td className="px-4 py-4 text-center">
                             <button
-                              onClick={() => handleOpenEditModal(student.originalIndex)}
-                              className="p-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors"
-                              title="Edit Entry"
+                              type="button"
+                              onClick={() => toggleSelectRow(student.originalIndex)}
+                              className="text-indigo-600"
                             >
-                              <Edit2 size={16} />
+                              {isSelected ? <CheckSquare size={18} /> : <Square size={18} className="text-slate-300" />}
                             </button>
-                            <button
-                              onClick={() => handleDeleteEntry(student.originalIndex)}
-                              className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
-                              title="Delete Entry"
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
+                          </td>
+                        )}
+                        <td className="px-5 py-4 text-xs font-bold text-slate-500">{index + 1}</td>
+                        <td className="px-5 py-4 font-bold text-slate-800">{student.name || "Unnamed"}</td>
+                        <td className="px-5 py-4 font-mono text-xs text-slate-700">{student.roll || "—"}</td>
+                        <td className="px-5 py-4 text-sm text-slate-600">{student.email || "—"}</td>
+                        <td className="px-5 py-4">
+                          <span className={`inline-flex px-3 py-1.5 rounded-full border text-xs ${slotBadgeClass(student.slot)}`}>
+                            {getNormalizedSlot(student.slot)}
+                          </span>
                         </td>
-                      )}
-                    </tr>
-                  ))}
+                        {isAdmin && (
+                          <td className="px-5 py-4 text-center">
+                            <div className="flex items-center justify-center gap-2">
+                              <button
+                                onClick={() => handleOpenEditModal(student.originalIndex)}
+                                className="p-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors"
+                                title="Edit Entry"
+                              >
+                                <Edit2 size={16} />
+                              </button>
+                              <button
+                                onClick={() => triggerSingleDelete(student.originalIndex, student.name)}
+                                className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                                title="Delete Entry"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             )}
@@ -639,7 +758,7 @@ export default function GymAllocationResults({
                   value={adminInputKey}
                   onChange={(e) => setAdminInputKey(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none"
-                  placeholder="Key (Default: admin123)"
+                  placeholder="Key"
                   autoFocus
                 />
               </div>
@@ -694,15 +813,15 @@ export default function GymAllocationResults({
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-500 mb-1">ALLOCATED SLOT</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1">ALLOCATED SLOT / STATUS</label>
                 <select
                   value={formData.slot}
                   onChange={(e) => setFormData({ ...formData, slot: e.target.value })}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:outline-none"
                 >
-                  {slotInfo.map((s) => (
-                    <option key={s.num} value={`SLOT ${s.num}`}>
-                      Slot {s.num} ({s.time})
+                  {slotCategories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.id} {cat.type === "standard" ? `(${cat.time})` : ""}
                     </option>
                   ))}
                 </select>
@@ -711,6 +830,33 @@ export default function GymAllocationResults({
                 <Save size={18} /> Save Entry
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* CUSTOM CONFIRMATION MODAL FOR DELETIONS */}
+      {deleteConfirmModal.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full shadow-2xl border border-slate-100 text-center">
+            <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle size={24} />
+            </div>
+            <h3 className="font-black text-xl text-slate-800 mb-2">{deleteConfirmModal.title}</h3>
+            <p className="text-sm text-slate-500 mb-6">{deleteConfirmModal.message}</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setDeleteConfirmModal({ isOpen: false, indicesToDelete: [], title: "", message: "" })}
+                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={executeDelete}
+                className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg transition-all"
+              >
+                Confirm Delete
+              </button>
+            </div>
           </div>
         </div>
       )}
