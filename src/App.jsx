@@ -43,7 +43,6 @@ export default function GymAllocationResults({
   const [search, setSearch] = useState("");
   const [slotFilter, setSlotFilter] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
@@ -77,19 +76,22 @@ export default function GymAllocationResults({
   const [selectedIndices, setSelectedIndices] = useState([]);
 
   // All Slot Categories (Standard Slots + Special Categories in a Single Array)
-  const slotCategories = [
-    { id: "SLOT 1", num: 1, type: "standard", time: "4:30 AM - 5:30 AM", shortTime: "4:30 – 5:30 AM", color: "yellow", icon: "🌅" },
-    { id: "SLOT 2", num: 2, type: "standard", time: "5:30 AM - 7:00 AM", shortTime: "5:30 – 7:00 AM", color: "cyan", icon: "☀️" },
-    { id: "SLOT 3", num: 3, type: "standard", time: "7:00 AM - 8:30 AM", shortTime: "7:00 – 8:30 AM", color: "green", icon: "💪" },
-    { id: "SLOT 4", num: 4, type: "standard", time: "2:30 PM - 4:00 PM", shortTime: "2:30 – 4:00 PM", color: "red", icon: "🏃" },
-    { id: "SLOT 5", num: 5, type: "standard", time: "4:00 PM - 5:30 PM", shortTime: "4:00 – 5:30 PM", color: "purple", icon: "🔥" },
-    { id: "SLOT 6", num: 6, type: "standard", time: "5:30 PM - 7:00 PM", shortTime: "5:30 – 7:00 PM", color: "amber", icon: "⚡" },
-    { id: "SLOT 7", num: 7, type: "standard", time: "7:00 PM - 8:30 PM", shortTime: "7:00 – 8:30 PM", color: "pink", icon: "🏆" },
-    { id: "SLOT 8", num: 8, type: "standard", time: "8:30 PM - 10:00 PM", shortTime: "8:30 – 10:00 PM", color: "sky", icon: "🌙" },
-    { id: "SLOT 9", num: 9, type: "standard", time: "10:00 PM - 11:30 PM", shortTime: "10:00 – 11:30 PM", color: "indigo", icon: "🌃" },
-    { id: "Invalid email ID", type: "special", time: "Requires Email Correction", shortTime: "Invalid Email", color: "rose", icon: "⚠️" },
-    { id: "No slot allocated", type: "special", time: "Unassigned Students", shortTime: "Not Allocated", color: "slate", icon: "❓" },
-  ];
+  const slotCategories = useMemo(
+    () => [
+      { id: "SLOT 1", num: 1, type: "standard", time: "4:30 AM - 5:30 AM", shortTime: "4:30 – 5:30 AM", color: "yellow", icon: "🌅" },
+      { id: "SLOT 2", num: 2, type: "standard", time: "5:30 AM - 7:00 AM", shortTime: "5:30 – 7:00 AM", color: "cyan", icon: "☀️" },
+      { id: "SLOT 3", num: 3, type: "standard", time: "7:00 AM - 8:30 AM", shortTime: "7:00 – 8:30 AM", color: "green", icon: "💪" },
+      { id: "SLOT 4", num: 4, type: "standard", time: "2:30 PM - 4:00 PM", shortTime: "2:30 – 4:00 PM", color: "red", icon: "🏃" },
+      { id: "SLOT 5", num: 5, type: "standard", time: "4:00 PM - 5:30 PM", shortTime: "4:00 – 5:30 PM", color: "purple", icon: "🔥" },
+      { id: "SLOT 6", num: 6, type: "standard", time: "5:30 PM - 7:00 PM", shortTime: "5:30 – 7:00 PM", color: "amber", icon: "⚡" },
+      { id: "SLOT 7", num: 7, type: "standard", time: "7:00 PM - 8:30 PM", shortTime: "7:00 – 8:30 PM", color: "pink", icon: "🏆" },
+      { id: "SLOT 8", num: 8, type: "standard", time: "8:30 PM - 10:00 PM", shortTime: "8:30 – 10:00 PM", color: "sky", icon: "🌙" },
+      { id: "SLOT 9", num: 9, type: "standard", time: "10:00 PM - 11:30 PM", shortTime: "10:00 – 11:30 PM", color: "indigo", icon: "🌃" },
+      { id: "Invalid email ID", type: "special", time: "Requires Email Correction", shortTime: "Invalid Email", color: "rose", icon: "⚠️" },
+      { id: "No slot allocated", type: "special", time: "Unassigned Students", shortTime: "Not Allocated", color: "slate", icon: "❓" },
+    ],
+    []
+  );
 
   // Helper function to normalize slot values
   const getNormalizedSlot = (slotValue) => {
@@ -118,25 +120,28 @@ export default function GymAllocationResults({
   // ============================================================
 
   useEffect(() => {
-    const localData = localStorage.getItem("gym_allocation_data");
-    if (localData) {
-      try {
-        setStudents(JSON.parse(localData));
-        setLoading(false);
-        return;
-      } catch (e) {
-        console.error("Local data parse error:", e);
+    let isMounted = true;
+
+    try {
+      const localData = typeof window !== "undefined" ? localStorage.getItem("gym_allocation_data") : null;
+      if (localData) {
+        const parsed = JSON.parse(localData);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          if (isMounted) {
+            setStudents(parsed);
+            setLoading(false);
+          }
+          return;
+        }
       }
+    } catch (e) {
+      console.error("Local storage error:", e);
     }
 
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
     fetch(csvPath)
-      .then((response) => {
-        if (!response.ok) throw new Error(`Failed to fetch CSV (status ${response.status})`);
-        return response.text();
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.text();
       })
       .then((text) => {
         const parsed = Papa.parse(text, {
@@ -154,12 +159,6 @@ export default function GymAllocationResults({
               for (const candidate of candidates) {
                 for (const key of keys) {
                   if (normalize(key) === normalize(candidate)) return key;
-                }
-              }
-              for (const key of keys) {
-                const normalizedKey = normalize(key);
-                for (const candidate of candidates) {
-                  if (normalizedKey.includes(normalize(candidate).replace(/[^a-z0-9]/g, ""))) return key;
                 }
               }
               return null;
@@ -181,27 +180,31 @@ export default function GymAllocationResults({
           })
           .filter((student) => student.name || student.roll || student.email);
 
-        if (!cancelled) {
+        if (isMounted) {
           setStudents(rows);
-          localStorage.setItem("gym_allocation_data", JSON.stringify(rows));
+          if (typeof window !== "undefined") {
+            localStorage.setItem("gym_allocation_data", JSON.stringify(rows));
+          }
           setLoading(false);
         }
       })
       .catch((err) => {
-        if (!cancelled) {
-          setError(err.message);
+        console.error("CSV loading error:", err);
+        if (isMounted) {
           setLoading(false);
         }
       });
 
     return () => {
-      cancelled = true;
+      isMounted = false;
     };
   }, [csvPath]);
 
   const updateDataState = (updatedList) => {
     setStudents(updatedList);
-    localStorage.setItem("gym_allocation_data", JSON.stringify(updatedList));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("gym_allocation_data", JSON.stringify(updatedList));
+    }
     setSelectedIndices([]);
   };
 
@@ -325,13 +328,13 @@ export default function GymAllocationResults({
       counts[category] = (counts[category] || 0) + 1;
     });
     return counts;
-  }, [students]);
+  }, [students, slotCategories]);
 
   const activeSlots = useMemo(() => {
     return slotCategories
       .filter((c) => c.type === "standard")
       .filter((c) => (categoryCounts[c.id] || 0) > 0).length;
-  }, [categoryCounts]);
+  }, [categoryCounts, slotCategories]);
 
   const sortedAndFiltered = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -522,7 +525,7 @@ export default function GymAllocationResults({
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                  <Zap size={17} /> Active Slots
+                  <Clock size={17} /> Active Slots
                 </div>
                 <div className="text-3xl md:text-4xl font-black text-slate-800 mt-2">
                   {activeSlots}<span className="text-base text-slate-400"> / 9</span>
