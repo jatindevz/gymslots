@@ -1,250 +1,378 @@
 name,roll,email,slot,isPowerlifter
-A Govindhudu Yadav,525EC0005,525ec0005@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Abdulla Ahmed,125cs0040,125cs0040@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Abhay Kumar,523me0008,523me0008@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Abhilash Kumar,524me0007,524me0007@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Abhinav rakesh,125ec0062,125ec0062@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Abhiroop Bose,524me0006,524me0006@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Aditya,523cs0018,523cs0018@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Aftab,123cs0068,123cs0068@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Ajay,124ad0036,124ad0036@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Akhil,124ad0066,124ad0066@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Akshat Gupta,125CS0001,125cs0001@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Akshat Singh,123ME0032,123me0032@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Akshay,123ad0058,123ad0058@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Akshay Kumar,124cs0041,124cs0041@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Akshay M R,225cs2012,225cs2012@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-ALLU JITENDRA MANOJ,226cs2015,226cs2015@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Aniket Kumar,125me0020,125me0020@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Aniket Patil,124cs0081,124CS0081@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Animesh,125me0039,125me0039@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-AnishN,123ad0048,123ad0048@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Anjani Kumar Singh,524CS0003,524cs0003@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Anshu Raj,125ec0037,125ec0037@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Anudeep,124ec0006,124ec0006@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-anuj kumar,123me0002,126me0002@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Aravala Kishore,124ec0003,124ec0003@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Arindam Dubey,525EC0013,525ec0013@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Arman Jawaid,125ad0028,125ad0028@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Arnav Sharda,123cs0064,123cs0064@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Arpit saini,126EC0001,126ec0001@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Arun V,226ec1005,226ec1005@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-aryan,524ec0007,524ec0007@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Aryan,123cs0020,123cs0020@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Ayush,123cs0057,123cs0057@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Ayush Gatla,124cs0038,124cs0038@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Ayush Patel,125EC0012,125ec0012@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-B sai veerendra,124cs0044,124cs0044@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-B shiva teja,125ad0054,125ad0054@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-b.Ranjith,123ec0037,123ec0037@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-B.THRINESH,124EC0008,124ec0008@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Babu T,125ME0042,125me0042@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Balaji Baskar,523cs0016,523cs0016@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Balarama Krishna Goparaju,226ec2005,226ec2005@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Balija Manohar,124CS0062,124cs0062@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-BHANU VIGNAN,524ME0004,524me0004@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-BHARADWAZAPPA SALNKU,125AD0056,125ad0056@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Bharth,524ec0003,524ec0003@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Bhavesh Dahake,226CS1001,226CS1001@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Bheemireddy Lakshya Samhitha,126EC0024,126ec0024@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-BVMSL GANESH,124cs0033,124cs0033@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Chanakya,124cs0023,124cs0023@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Charan sai,124cs0051,124cs0051@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Chillumula Anil kumar,123me0012,123me0012@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-D S Vedha Viyas,225CS2006,225cs2006@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-D Sravan Siddhardha,123ad0050,123ad0050@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Dandu Tejas Varma,125ec0011,125ec0011@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Danish Raja,125EC0048,125ec0048@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Debraj Mondal,226cs1005,226cs1005@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Deep Samanta,125ec0003,125ec0003@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-DEEPAK,524CS0004,524CS0004@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Deepak,123cs0033@iiitk.ac.in,123cs0033@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Devanshu Dev,525EC0002,525ec0002@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Dheeraj,123ad0049,123ad0049@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-DHEERAVATH VARUNKANTH NAIK,126ME0018,126me0018@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Divyanshu Tata,125cs0026,125cs0026@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Dungavath Sridhar Naik,226cs3001,226cs3001@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Duvva Sai Vivek,124ad0048,124ad0048@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-E.siddhartha,125cs0028,125CS0028@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Endravath Hanuma,123me0003,123me0003@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-enjamul,225cs1004,225cs1004@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-G Sai Sanjeev,125ec0002,125ec0002@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-G Srivathsan,125ad0018,125ad0018@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-G.SIDDHARTHA,124AD0050,124ad0050@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-G.V.Chaithanya,525cs0006,525cs0006@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-G.VENKATA NARAYANA,125CS0058,125cs0058@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-GADDAM SURYA CHARAN REDDY,125ec0044,125ec0044@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-GARIKAPATI DARSHITH,125CS0062,125cs0062@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Geetham,123me0019,123me0019@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Gnanaprakash,125CS0025,125cs0025@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Gopichand,523ME0011,523me0011@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-HANUMAN MAURYA,526CS0009,526cs0009@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Harish,123cs0065,123cs0065@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Haritbaran VM,523me0010,523me0010@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Harsh Rajput,523cs0005,523cs0005@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Harsha,124me0014,124me0014@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Harsha,123cs0046,123cs0046@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Harsha G V Subedar,226CS2004,226cs2004@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Harshit Khare,124ad0051,124ad0051@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Harshvardhan Singh Chauhan,524CS0020,524cs0020@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Hemanth Kumar Pendem,124ec0015,124ec0015@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Himal Tyagi,525CS0007,525cs0007@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Himanshu Pawar,124me0034,124me0034@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-J anirudh,125ME0031,125me0031@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Jagata Tagore,123CS0042,123cs0042@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-James,523ME0004,523me0004@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-jashan,126ME0057,126me0057@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Jatin,124me0005,124me0005@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Jatin,123ad0032,123ad0032@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-JUTURU VISHNU ANJAN KUMAR,126EC0005,126EC0005@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-JV Kousthubh,123cs0074,123cs0074@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-K Vidhya,F011,smp@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-K.Abhiram,124cs0034,124cs0034@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Kairav Nandi,124cs0080,124cs0080@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-kalamati siddhardha,125ad0023,125ad0023@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Kalasani Dhanush Reddy,123ec0010,123ec0010@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Kanakaveeti Sai Shiva Nanda Reddy,124cs0032,124cs0032@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-kancharla surya venkata sai praneeth,226cs2006,226cs2006@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-KARAPAKULA Hrushikesh,125CS0019,125cs0019@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Karthik Chakala,123cs0038,123cs0038@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Karthikeyan,124me0008,124me0008@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-kartikey Seth,124ME0036,124me0036@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Kasireddy Nikitheswar Reddy,526me0007,526me0007@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Keshav Sharma,123cs0072,123cs0072@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Kolipaka sravan,125me0026,125me0026@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Kowshik Reddys,123ad0005,123ad0005@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Kubera shivas,123me0015,123me0015@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-KULDEEP shukla,123ec0036,123ec0036@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Kurakula sai,525me0014,525me0014@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Kuruva Tharun,125CS0065,125cs0065@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-L Sandeep,123ec0024,123ec0024@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-lekaj,125ad0030,125ad0030@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-M Bharath Kumar,124cs0070,124cs0070@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-M karthik,124ad0034,124ad0034@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-M. HARSHA VARDHAN REDDY,123cs0044,123cs0044@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-M.Bharath naidu,124cs0056,124cs0056@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-M.Dharani Teja,124EC0016,124ec0016@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-M.thanuj,123cs0040,123cs0040@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Maddi Venkata Sai Karthikeya,124cs0021,124cs0021@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Madhu Teja,123ec0030,123ec0030@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Maniprakash S,F011,smp@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Manish,124cs0061,124cs0061@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Manoj Amaravadhi,123cs0023,123cs0023@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Maringanti Acharya Srisha,124me0025,124me0025@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Matam Charan tej,124cs0012,124cs0012@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Mayank Prasad,124cs0003,124cs0003@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Mohammed Arshad Mansuri,123cs0001,123cs0001@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Mohit saini,525ec0007,525ec0007@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Motheendra B,123ec0040,123ec0040@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-MOTURI KAUSHIK NIHAL,126cs0011,126cs0011@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Mridul S Kumar,123ec0006,123ec0006@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-MUDAVATH MALLUNAIK,124cs0025,124cs0025@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Mulagala Sai Charan,123AD0002,123ad0002@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-N.shyam sai rajesh,126ME0008,126me0008@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Nagulesh T,123me0016,123me0016@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Nallamilli mahesh,125ad0061,125ad0061@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Nikhil Killada,123me0034,123me0034@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-NIKHIL M,226cs3004,226cs3004@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-O.Navadeep,124cs0002,124cs0002@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-P Siddardha,125ec0004,125ec0004@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Paarth Batra,123cs0022,123cs0022@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Palle Chandrahasan Reddy,226cs1016,226cs1016@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Pankaj,124ad0019,124ad0019@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-PARELLA BHARGAV SRIRAM,124AD0009,124ad0009@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Pavan ch,125AD0043,125ad0043@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Pendyala Shashank,226cs1004,226cs1004@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Pentakota Charan,125cs0039,125cs0039@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-PHATAN ASIM KHAN,125AD0037,125ad0037@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Pitla Pavan kumar,126ec0044,126ec0044@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-PIYUSH SINGH,524EC0014,524ec0014@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Poojith Kumar,124cs0029,124cs0029@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Pradhyumna Reddy Goli,125me0013,125me0013@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-PRADYUT RUIDAS,525me0007,525me007@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Pragya,225cs1011,225cs1011@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Pranav Shrivastava,126ec0064,126ec0064@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Prasanth,123me0039,123me0039@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Prateek kumar,524ME0001,524me0001@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Preetham Reddy,124CS0063,124cs0063@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-PRIYANSHU KUMAR,123cs0045,123cs0045@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Raghu Ram Y,125CS0038,125cs0038@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Rajana Jai Sainath,226ec2009,226ec2009@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Rajesh,124ad0007,124ad0007@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Ramcharan,124cs0036,124cs0036@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-RAMCHARAN,125cs0007,125cs0007@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Reddy Shailesh,524cs0010,524cs0010@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Rehan Afroz,124ec0033,124ec0033@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-REVANTH REDDY ALLIPURAPU,125CS0012,125cs0012@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Rineet PANDEY,123cs0009,123cs0009@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Rishabh,525me0010,525ME0010@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-ROHAN KUMAR M,124me0002,124me0002@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Rohit Chauhan,123cs0054,123cs0054@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Rohith,125ec0021,125ec0021@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Rohitharan J K,125ec0046,125ec0046@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-RUNOSH LAL,126CS0061,126cs0061@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Rushikesh Iche,123CS0035,123cs0035@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Sahil Jal,124cs0068,124cs0068@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-SAHIL KUMAR,124cs0053,124cs0053@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-SAHIL PAZARE,123me0020,123me0020@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-sai videsh,523cs0014,523cs0014@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Saikrishna,124ad0047,124ad0047@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Samarth Bhagwan Sakhale,123ME0005,123me0005@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Samridh verma,125me0041,125me0041@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Santosh Kumar,524me0002,525me0002@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Sathwik munigala,123me0035,123me0035@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Sathwik munigala,123me0035,123me0035@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-SATYAM KUMAR,125ME0047,125me0047@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Satyaranjan,125me0017,125me0017@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Saurav singh,125me0021,125me0021@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Shailendra Pratap Singh,126cs0034,126cs0034@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Sham H Pawar,124ec0058,124ec0058@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Shanu Jha,524me0003,524me0003@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-Shastrajun Singh,524me0009,524me0009@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Sheelam Aravind,226ec2001,226ec2001@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Shubham,123ad0016,123ad0016@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Siddanadham SS Vijay Kumar,226EC1009,226ec1009@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Siddharth Karmokar,123cs0061,123cs0061@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-siddhartha,125me0024,125me0024@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Soham Memane,125AD0012,125ad0012@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Sreehas reddy,125ad0003,125ad0003@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Sreekanth,124me0020,124me0020@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Sreekar Karanam,125ec0024,125ec0024@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Srikanth nayak,124me0012,124me0012@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-srinivas,123ad0033,123ad0033@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Srinivas Patro,524cs0021,524cs0021@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Srujan chandra,125me0033,125me0033@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Sujan,225cs2008,225cs2008@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Sumanth K,226CS2007,226cs2007@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-sumit kumar,124ec0014,124ec0014@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Sundar Reddy,123ME0037,123me0037@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Surasani Pavan,125cs0046,125cs0046@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Surendra Reddy,525me0013,525me0013@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Surya yakkali,124ad0055,124ad0055@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Suryansh pandey,125me0043,125me0043@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Swamy Sandeep Moka,225cs1012,225cs1012@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Swapnil,125me0038,125me0038@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-T Pavan,124ec0048,124ec0048@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-T.AKHIL,124EC0025,124ec0025@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-TANMAY JAIN,123ec0025,123ec0025@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-TEJO,124me0001,124me0001@iiitk.ac.in,SLOT 5 (4:00 PM TO 5:30 PM),false
-TSAMA NAGA VENKATA KASI MANIKANTA,124ec0031,124ec0031@iiitk.ac.in,SLOT 8 (8:30 PM TO 10:00 PM),false
-Ujjwal Prakash,125ME0003,125me0003@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Umesh,123cs0055,123cs0055@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-utkarsh chaudhary,123cs0012,123cs0012@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Utkarsh Singh,523cs0010,523cs0010@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-V JAI CHARAN,126CS0062,126CS0062@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-V Siva Sai,123ad0023,123ad0023@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Valle Navadeep,124ec0020,124ec0020@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-VANTHALA JASWANTH,525cs0008,525cs0008@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Vedansh Paliwal,123EC0013,123ec0013@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Veeren umesh birari,125me0053,125me0053@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-Vineesh,124ec0054,124ec0054@iiitk.ac.in,SLOT 4 (2:30 PM TO 4:00 PM),false
-vishal yadav,225cs1009,225cs1009@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Vishwesh,123cs0047,123cs0047@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-Vivek Asnani,525cs0003,525cs0003@iiitk.ac.in,SLOT 9 (10:00 PM TO 11:30 PM),false
-Y. Sri Rama Bharadwaj,123cs0030,123cs0030@iiitk.ac.in,SLOT 3 (7:00 AM TO 8:30 AM),false
-Yarrabolu Hemanth kumar,124ec0022,124ec0022@iiitk.ac.in,SLOT 2 (5:30 AM TO 7:00 AM),false
-YARRAM VEERA BRAHMENDRA REDDY,126CS0027,126CS0027@iiitk.ac.in,SLOT 1 (4:30 AM TO 5:30 AM),false
-Yashwant,125cs0004,125cs0004@iiitk.ac.in,SLOT 7 (7:00 PM TO 8:30 PM),false
-Yeswanth,125ec0034,125ec0034@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-YILLA PAVAN SHANKAR,124ME0030,124me0030@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
-Yuvraj Anand,123ME0027,123me0027@iiitk.ac.in,SLOT 6 (5:30 PM TO 7:00 PM),false
+226cs2014@iiitk.ac.in,Aditya Kant Kushwaha,226CS2014,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124me0002@iiitk.ac.in,ROHAN KUMAR M,124me0002,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124me0005@iiitk.ac.in,Jatin Sharma,124me0005,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124ec0006@iiitk.ac.in,Goli Anudeep,124ec0006,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+524me0004@iiitk.ac.in,BHANU VIGNAN,524ME0004,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124ec0054@iiitk.ac.in,Vineesh,124ec0054,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+525cs0008@iiitk.ac.in,VANTHALA JASWANTH,525cs0008,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124me0030@iiitk.ac.in,YILLA PAVAN SHANKAR,124ME0030,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125CS0039@iiitk.ac.in,Pentakota charan,125cs0039,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ec0053@iiitk.ac.in,Pavan,124ec0053,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ad0036@iiitk.ac.in,Dharavath Ajay,124ad0036,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125me0038@iiitk.ac.in,Swapnil,125me0038,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+524me0006@iiitk.ac.in,Abhiroop Bose,524me0006,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0013@iiitk.ac.in,D.V.S.S.ROHITH,124AD0013,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124ec0048@iiitk.ac.in,T Pavan,124ec0048,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ad0009@iiitk.ac.in,PARELLA BHARGAV SRIRAM,124AD0009,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+126ec0019@iiitk.ac.in,M DHASWITH,126ec0019,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+525ec0005@iiitk.ac.in,A Govindhudu Yadav,525EC0005,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+525ME0010@iiitk.ac.in,Rishav chaturvedi,525me0010,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+225cs1009@iiitk.ac.in,vishal yadav,225cs1009,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+123cs0045@iiitk.ac.in,PRIYANSHU KUMAR,123cs0045,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+125ad0018@iiitk.ac.in,G SRIVATHSAN,125AD0018,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0047@iiitk.ac.in,saikrishna,124ad0047,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+525cs0006@iiitk.ac.in,G.V.Chaithanya,525cs0006,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+523cs0016@iiitk.ac.in,Balaji baskar,523cs0016,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124me0001@iiitk.ac.in,TEJO,124me0001,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123cs0020@iiitk.ac.in,Aryan,123cs0020,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+524cs0018@iiitk.ac.in,GANDHAM YADIDHYA,524cs0018,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125cs0007@iiitk.ac.in,N.Ramcharan,125cs0007,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123cs0048@iiitk.ac.in,Mahesh Vellogi,123cs0048,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+524me0001@iiitk.ac.in,Prateek kumar,524ME0001,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123cs0065@iiitk.ac.in,Harish,123cs0065,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124ec0047@iiitk.ac.in,Godson David N,124ec0047,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125ecoo22@iiitk.ac.in,harsha,125ec0022,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125me0031@iiitk.ac.in,JANGA ANIRUDH,125me0031,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123cs0030@iiitk.ac.in,Y.SRI RAMA BHARADWAJ,123cs0030,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125cs0028@iiitk.ac.in,E.siddhartha,125cs0028,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0044@iiitk.ac.in,B sai veerendra,124cs0044,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124cs0002@iiitk.ac.in,O.Navadeep,124cs0002,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+524cs0021@iiitk.ac.in,Srinivas Patro,524cs0021,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125ad0037@iiitk.ac.in,Pasim khan,125AD0037,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123cs0074@iiitk.ac.in,Kousthub,123cs0074,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0034@iiitk.ac.in,M. Karthik anil sai,124ad0034,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+524me0007@iiitk.ac.in,Abhilash Kumar,524me0007,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+123cs0068@iiitk.ac.in,Aftab,123cs0068,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+123ad0013@iiitk.ac.in,Dinesh Sharma,123AD0013,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125cs0005@iiitk.ac.in,Karamtothu Nineesh,125CS0005,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125ec0062@iiitk.ac.in,Abhinav rakesh,125ec0062,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+524me0009@iiitk.ac.in,Shastrajun,524me0009,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+123cs0023@iiitk.ac.in,Manoj Amaravadhi,123cs0023,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+524cs0010@iiitk.ac.in,Reddy Shailesh,524cs0010,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125ad0030@iiitk.ac.in,lekaj,125ad0030,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0045@iiitk.ac.in,Yukwsh Naren M,124cs0045,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125me0024@iiitk.ac.in,siddhartha,125me0024,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+526,Alok Santosh Samudre,526ME0006,Invalid email ID,FALSE
+125ec0021@iiitk.ac.in,Rohith midde,125ec0021,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124ec0011@iiitk.ac.in,Romith,124ec0011,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123ad0023@iiitk.ac.in,Veeranki Siva Sai,123ad0023,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ad0051@iiitk.ac.in,Harshit Khare,124ad0051,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ec0033@iiitk.ac.in,REHAN AFROZ,124ec0033,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125cs0066@iiitk.ac.in,Samyak,125CS0066,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124ad0033@iiik.ac.in,RISHIK REDDY VANGA,124ad0033,Invalid email ID,FALSE
+124me0015@iiitk.ac.in,M Nitish Kumar,124me0015,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124ec0059@iiitk.ac.in,Chitti Charan Raj,124ec0059,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+523cs0014@iiitk.ac.in,sai videsh,523cs0014,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0005@iiitk.ac.in,K SEETHARAM CHARAN,124ad0005,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+523cs0009@iiitk.ac.in,Dhruv singh,523cs0009,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+525ec0002@iiitk.ac.in,Devanshu Dev,525EC0002,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124cs0081@iiitk.ac.in,Aniket,124cs0081,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+524ec0007@iiitk.ac.in,Aryan Anand,524ec0007,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124cs0038@iiitk.ac.in,Ayush Gatla,124cs0038,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+123ad0018@iiitk.ac.in,Chandru M,123ad0018,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123,Jagata Tagore,123cs0042,Invalid email ID,FALSE
+124ec0020@iiitk.ac.in,Valle Navadeep,124ec0020,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125me0043@iiitk.ac.in,Suryansh pandey,125me0043,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124me0034@iiitk.ac.in,Himanshu Pawar,124me0034,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125ad0041@iiitk.ac.in,Sohith Kodavali,125ad0041,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124cs0032@iiitk.ac.in,124cs0032@iiitk.ac.in,124cs0032,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123cs0064@iiitk.ac.in,Arnav Sharda,123cs0064,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+"526cs0001@iiitk,ac,in",aniket tondare,526cs0001,Invalid email ID,FALSE
+125ec0024@iiitk.ac.in,Sreekar Karanam,125EC0024,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0046@iiitk.ac.in,B V Karthikeya Sarma,124cs0046,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125cs0052@iiitk.ac.in,A. Pavan Singh,125CS0052,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124cs0052@iiitk.ac.in,K Santhosh,124cs0052,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+525ec0003@iiitk.ac.in,y jasvanth kumar,525ec0003,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125cs0025@iiitk.ac.in,N.GNANAPRAKASH,125cs0025,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+225cs1012@iiitk.ac.in,Swamy Sandeep Moka,225cs1012,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124ec0001@iiitk.ac.in,GORAM VISHAL,124EC0001,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+123cs0046@iiitk.ac.in,Harsha,123cs0046,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ec0025@iiitk.ac.in,T.AKHIL,124EC0025,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125cs0011@iiitk.ac.in,akshith,125cs0011,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125me0042@iiitk.ac.in,Babu T,125ME0042,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+523me0010@iiitk.ac.in,Haritbaran VM,523me0010,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125me0036@iiitk.ac.in,Harshad reddy,125ME0036,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124cs0023@iiitk.ac.in,Kavuluri Chanakya,124cs0023,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125ec0011@iiitk.ac.in,DANDU TEJAS VARMA,125ec0011,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125ec0056@iiitk.ac.in,N.Deelip kumar,125EC0056,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125me0003@iiitk.ac.in,Ujjwal Prakash,125ME0003,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+124cs0036@iiitk.ac.in,Ramcharan,124cs0036,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+523me0004@iiitk.ac.in,James,523ME0004,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125ad0043@iitk.ax.in,Pavan ch,125ad0043,Invalid email ID,FALSE
+124me0014@iiitk.ac.in,Harsha,124me0014,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125me0001@iiitk.ac.in,Ganesh,125me0001,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0085@iiitk.ac.in,Sumit,124cs0085,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+125me0010@iiitk.ac.in,Saksham Singh,125me0010,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+525me0013@iiitk.ac.in,Surendra Reddy,525me0013,SLOT 6 (5:30 PM TO 7:00 PM),FALSE
+124me0012@iiitk.ac.in,Srikanth nayak,124me0012,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125cs0049@iiitk.ac.in,Kondi rithvesh,125cs0049,No slot allocated,FALSE
+125me0021@iiitk.ac.in,Saurav singh,125me0021,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124ad0032@iiitk.ac.in,Mokshagna BC,124ad0032,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125me0049@iiitk.ac.in,Mahesh,125me0049,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123cs0012@iiitk.ac.in,utkarsh chuadhary,123cs0012,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125ad0023@iiitk.ac.in,siddhardha,125ad0023,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+123me0015@iiitk.ac.in,Kubera shivas,123me0015,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125ec0046@iiit.ac.in,Rohitharan j k,125ec0046,Invalid email ID,FALSE
+124Ec0031@iiitk.ac.in,TSAMA NAGA VENKATA KASI MANIKANTA,124Ec0031,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124ad0001@iiitk.ac.in,K.Indukumar,124ad0001,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125cs0058@iiitk.ac.in,G.VENKATA NARAYANA,125CS0058,No slot allocated,FALSE
+126ec0045@iiitk.ac.in,Shubham Srivastava,126EC0045,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+125ad0028@iiitk.ac.in,Arman Jawaid,125AD0028,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+123me0039@iiitk.ac.in,Prasanth,123me0039,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123ad0046@iiitk.ac.in,Jawad alik khan,123ad0046,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+225cs2006@iiitk.ac.in,D S Vedha Viyas,225cs2006,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0015@iiitk.ac.in,Guddeti Srivardhan,124cs0015,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125ad0026@iiitk.ac.in,YEDIDA SANJAY,125ad0026,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125ec0048@iiitk.ac.in,Danish Raja,125EC0048,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126me0057@iiitk.ac.in,jashan,126ME0057,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+124me0029@iiitk.ac.in,Katravath vittal,124me0029,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+525ec0013@iiitk.ac.in,Arindam Dubey,525ec0013,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124cs0014@iiitk.ac.in,E.Bharath,124CS0014,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125cs0040@iiitk.ac.in,Abdulla Ahmed,125cs0040,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+523ec0012@iiitk.ac.in,Pranjal Upadhyay,523ec0012,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0049@iiitk.ac.in,Sankalp Thorat,124cs0049,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+226cs2006@iiitk.ac.in,kancharla surya venkata sai praneeth,226cs2006,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0012@iiitk.ac.in,Matam Charan tej,124cs0012,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123cs0035@iiitk.ac.in,RUSHIKESH ICHE,123cs0035,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123ad0050@iiitk.ac.in,D Sravan Siddhardha,123AD0050,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0067@iiitk.ac.in,Ishank,124ad0067,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0064@iiitk.ac.in,Praneeth,124ad0064,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+523ME0011@iiitk.ac.in,Gopichand Mallula,523me0011,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124cs0085@iiitk.ac.in,Sumit Pramod,124cs0085,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+126ad0007@iiitk.ac.in,Munjeti shiva sankar,126ad0007,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+226cs2009@iiitk.ac.in,Kamal Kant maurya,226cs2009,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126cs0027@iiitk.ac.in,YARRAM VEERA BRAHMENDRA REDDY,126CS0027,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126ad0017@iiitk.ac.in,THUMMA VENKATA NAGA KRISHNA VAMSI,17,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+523me0001@iiitk.ac.in,Anish Kumar Gupta,523me0001,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0056@iiitk.ac.in,M.Bharath naidu,124cs0056,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+524me0003@iiitk.ac.in,Shanu Jha,524me0003,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125me0035aiiitk.ac.in,Mende raviteja,125me0035,Invalid email ID,FALSE
+226ec2005@iiitk.ac.in,BALARAMA KRISHNA GOPARAJU,226ec2005,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+525ec0009@iiitk.ac.in,Nalli Ruthvik,525Ec0009,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+125ec0036@iiitk.ac.in,I. Suhas,125ec0036,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123ec0015@iiitk.ac.in,Naga Praveen,123EC0015,No slot allocated,FALSE
+125ec0054@iiitk.ac.in,Srusanth,125ec0054,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+126ad0011@iiitk.ac.in,Puligopu Divya sathwik,126ad0011,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+125cs0044@iiitk.ac.in,Vasu jangid,125cs0044,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+525ec0007@iiitk.ac.in,MOhit saini,525ec007,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0041@iiitk.ac.in,Akshay Kumar,124cs0041,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+126ec0044@iiitk.ac.in,PITLA PAVAN KUMAR,126ec0044,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123cs0050@iiitk.ac.in,Pranav Somnath Undirkalle,123cs0050,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+126me0006@iiitk.ac.in,Bikash Kumar,126ME0006,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+524cs0016@iiitk.ac.in,Vishwajeet singh bhati,524cs0016,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123ec0025@iiitk.ac.in,Tanmay jain,123ec0025,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+125me0041@iiitk.ac.in,SAMRIDH VERMA,125me0041,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125ec0012@iiitk.ac.in,Ayush Patel,125EC0012,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+123me0005@iiitk.ac.in,Samarth Bhagwan Sakhale,123ME0005,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123ad0034@iiitk.ac.in,Amar,123ad0034,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125cs0059@iiitk.ac.in,Daksh,125cs0059,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0025@iiitk.ac.in,MUDAVATH MALLU NAIK,124cs0025,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123ec0030@iiitk.ac.in,Madhu teja,123ec0030,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123me0040@iiitk.ac.in,THIRUNAGARI SAI RAM CHARAN,123ME0040,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123cs0034@iiitk.ac.in,Deepak,123cs0034,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+226cs2004@iiitk.ac.in,Harsha G V Subedar,226CS2004,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+525ec0017@iiitk.ac.in,K hari krishna,525ec0017,No slot allocated,FALSE
+125me0054@iiitk.ac.in,ankit meena,125me0054,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125cs0046@iiitk.ac.in,Pavan Surasani,125cs0046,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+226ec2007@iiitk.ac.in,Jouher Sharief,226ec2007,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+124cs0051@iiitk.ac.in,Charansai,124cs0051,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+525ec0015@iiitk.ac.in,karthik thatikonda,525ec0015,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+125me0051@iiitk.ac.in,Thejeswar,125me0051,SLOT 2 (5:30 AM TO 7:00 AM),FALSE
+123ad0043@iiitk.ac.in,Rama Krishna Reddy,123ad0043,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125ec0042@iiitk.ac.in,",Munigala Shiva",125EC0042,No slot allocated,FALSE
+126cs0077@iiitk.ac.in,Ravi Ghaywat,126cs0077,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123ad0061@iiitk.ac.in,Shivam Singh,123ad0061,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+124cs0043@iiitk.ac.in,D Haswanth,124cs0043,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123ec0040@iiitk.ac.in,B.Motheendra,123ec0040,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123ad0054@iiitk.ac.in,Dayyan Soherwardi,123ad0054,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123ad0016@iiitk.ac.in,Shubham,123ad0016,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+126AD0035@iiit.ac.in,BANDARU SEKHAR KUMAR,126AD0035,Invalid email ID,FALSE
+126cs0070@iiit.ac.in,Abhas verma,126cs0070,Invalid email ID,FALSE
+123me0035@iiitk.ac.in,Sathwik munigala,123me0035,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125me0025@iiitk.ac.in,Anuj Sarode,125me0025,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125me0033@iiitk.ac.in,Gorla Srujan chandra,125me0023,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+526me0007@iiitk.ac.in,Kasireddy Nikitheswar Reddy,526me0007,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125EC0055@iiitk.ac.in,Jakkarthy yugendhar,125ec0055,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+225cs1015@iiitk.ac.in,Pavan Chandra Punem,225cs1015,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+225cs2012@iiitk.ac.in,Akshay M R,225cs2012,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+124ad0025@iiitk.ac.in,Bhargava Reddy Kandukuri,124ad0025,No slot allocated,FALSE
+524cs0005@iiitk.ac.in,S Hariharan,524cs0005,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+526EC0005@iiitk.ac.in,Piyush meena,526EC0005,No slot allocated,FALSE
+125ad0058@iiitk.ac.in,Vishwa Vikas,125ad0058,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126cs0029@iiitk.ac.in,Yuvraj,126CS0029,No slot allocated,FALSE
+525cs0009@iiitk.ac.in,Taman Kumar,525cs0009,No slot allocated,FALSE
+126ad0052@iiitk.ac.in,Sahil Vilas Gedam,126AD0052,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123cs0072@iiitk.ac.in,Keshav Sharma,123cs0072,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+226ec2009@iiitk.ac.in,R jai Sainath,226ec2009,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125me0053@iiitk.ac.in,Veeren Umesh Birari,125me0053,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+125me0023@iiitk.ac.in,Mohit Kumar Bairwa,125Me0023,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+126EC0060@iiitk.ac.in,Gautam kumar,126EC0060,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123ad0058@iiitk.ac.in,Bora akshay kumar reddy,123ad0058,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125me0020@iiitk.ac.in,Aniket Kumar,125me0020,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125cs0067@iiitk.ac.in,Shreya Chaturvedi,125CS0067,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+525ec0006@iiitk.ac.in,V Lakshmi Narasimha,525ec0006,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+125cs0034@iiitk.ac.in,Lunavath Dhanush Kumar,125cs0034,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123cs0001@iiitk.ac.in,Mohammed Arshad Mansuri,123cs0001,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+125cs0026@iiitk.ac.in,Divyanshu Tata,125cs0026,SLOT 3 (7:00 AM TO 8:30 AM),FALSE
+123cs0022@iiitk.ac.in,Paarth Batra,123cs0022,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+524me0011@iiitk.ac.in,P surya kiran,524me0011,No slot allocated,FALSE
+124ad0003@iiitk.ac.in,ANIRUDH REDDY,124ad0003,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+123me0012@iiitk.ac.in,Chillumula Anil kumar,123me0012,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+123me0004@iiitk.ac.in,sameer dwivedi,123me0004,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+125ec0003@iiitk.ac.in,Deep Samanta,125ec0003,No slot allocated,FALSE
+123ec0027@iiitk.ac.in,HARSHIT ORAON,123EC0027,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+124me0009@iiitk.ac.in,Manikanta,124me0009,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+123me0003@iiitk.ac.in,Endravath Hanuma,123me0003,No slot allocated,FALSE
+125me0026@iiitk.ac.in,Kolipaka sravan,125me0026,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126cs0059@iiitk.ac.in,Naval kishor kumawat,126cs0059,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+525me0007@iiitk.ac.in,Pradyut Ruidas,525me007,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+523,Ramesh,523cs0015,Invalid email ID,FALSE
+524cs0007@iiitk.ac.in,Ashish A,524cs0007,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+123cs0054@iiitk.ac.in,Rohit Chauhan,123cs0054,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+126EC0001,Arpit saini,126EC001,Invalid email ID,FALSE
+226ec1001@iiitk.ac.in,Goli Indra Sai Kumar,226ec1001,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126cs0042@iiitk.ac.in,Shaik Luqmaan,126CS0042,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123ME0032@iiitk.ac.in,Akshat R Singh,123ME0032,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0047@iiitk.ac.in,Dhruvashish,126cs0047,No slot allocated,FALSE
+226ec1006@iiitk.ac.in,Jampana Bhargav,226ec1006,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+123ec0036@iiitk.ac.in,Kuldeep shukla,123ec0036,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+123me0002@iiitk.ac.in,Kuldip Birhade,123ME0002,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126me0002@iiitk.ac.in,anuj kumar,126me0002,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+524cs0017@iiitk.ac.in,Gautam V,524cs0017,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125me0040@iiitk.ac.in,K Mohith Naik,125me0040,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+123me0037@iiitk.ac.in,Sundar Reddy,123ME0037,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126me0040@iiitk.ac.in,Ramavath Sandeep,126me0040,No slot allocated,FALSE
+126me0020,Sripathi Siva Sai Sampath Diwakar,126ME0020,Invalid email ID,FALSE
+125cs0069@iiitk.ac.in,VENTENIKI PRASANGI,125cs0069,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126me0027@iiitk.ac.in,Raghu Ram Kalla,126ME0027,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126cs0004@iiitk.ac.in,D.Anil Hemanth Reddy,126cs0004,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126ec0070@iiitk.ac.in,Nishk Kureel,126EC0070,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+523cs0010@iiitk.ac.in,Utkarsh Singh,523cs0010,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+123cs0047@iiitk.ac.in,Vishwesh Madiragani,123cs0047,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+126ec0068@iiitk.ac.in,Rajkishor Raul,126EC0068,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+126ad0037@iiitk.ac.in,Nallanagula Divyansh,126AD0037,No slot allocated,FALSE
+126ad0063@iiitk.ac.in,Janni Sudheer,126AD0063,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+524CS0004@iiitk.ac.in,DEEPAK KUMAR SINGH,524CS0004,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126cs0012@iiitk.ac.in,Harshal sharma,126CS0012,No slot allocated,FALSE
+123ad0048@iiitk.ac.in,Anish,123ad0048,SLOT 9 (10:00 PM TO 11:30 PM),FALSE
+124cs0042@iiitk.ac.in,Mokshagna,124cs0042,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+125ec0034@iiitk.ac.in,Yeswanth,125ec0034,No slot allocated,FALSE
+126EC0037@iiitk.ac.in,Siddela Aswin,126EC0037,No slot allocated,FALSE
+124cs0080@iiitk.ac.in,Kairav Nandi,124cs0080,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126cs0067@gmail.com,HEMANTH KUMAR K,126CS0067,Invalid email ID,FALSE
+226cs3008@iiitk.ac.in,Kaligiri Pavan,226CS3008,No slot allocated,FALSE
+225cs1005@iiitk.ac.in,Shaik afrid,225cs1005,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+124cs0020@iiitk.ac.in,Sai Ranga,124cs0020,No slot allocated,FALSE
+126cs0057@iiitk.ac.in,Devathi Dileep Kumar,126cs0057,No slot allocated,FALSE
+325me0011@iiitk.ac.in,Shaik Abdul Aziz,325me0011,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+525me0013@iiitk.ac.in,Surendra Reddy,525me0013,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+225cs2008@iiitk.ac.in,Sujan,225cs2008,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+226cs2015@iiitk.ac.in,ALLU JITENDRA MANOJ,226cs2015,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+124cs0003@iiitk.ac.in,Mayank Prasad,124cs0003,No slot allocated,FALSE
+123cs0031@iiitk.ac.in,Sanjay Davis,123cs0031,No slot allocated,FALSE
+126ad0026@iiitk.ac.in,Gumadi gyaneswar rao,126ad0026,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+124cs0053@iiitk.ac.in,Sahil Kumar,124cs0053,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+i125ad0040@iiitk.ac.in,Ramgopal Kumawat,125ad0040,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+523cs0018@iiitk.ac.in,Aditya,523cs0018,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+226ec2001@iiitk.ac.in,Sheelam Aravind,226ec2001,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+125ec0037@iiitk.ac.in,Anshu Raj,125ec0037,No slot allocated,FALSE
+125ad0016@iiitk.ac.in,Mahesh,125ad0016,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+126cs0017@iiitk.ac.in,Daggupati.Ajay kumar,126cs0017,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+226cs2003@iiitk.ac.in,Abhi Ram kaniti,226cs2003,No slot allocated,FALSE
+125EC0059@iiitk.ac.in,DK SYAM SUNDAR,125EC0059,No slot allocated,FALSE
+124ec0021@iiitk.ac.in,N Sagar,124ec0021,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+125ec0044@iiitk.ac.in,Surya Charan,125ec0044,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+124cs0076@iiitk.ac.in,DASARI VISHNU VARDHAN,124cs0076,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126ec0036@iiitk.ac.in,Galety Mohammad Ayyan Hussain,126EC0036,No slot allocated,FALSE
+524me0002@iiirk.ac.in,Santosh Kumar,524me0002,Invalid email ID,FALSE
+126ec0020@iiitk.ac.in,AAYAN NAIK,126EC0020,No slot allocated,FALSE
+525me0014@iiitk.ac.in,Kurakula sai,525me0014,No slot allocated,FALSE
+126ad0054@iiitk.ac.in,Md Dilshad Askar,126AD0054,No slot allocated,FALSE
+125cs0062@iiitk.ac.in,GARIKAPATI DARSHITH,125cs0062,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+226ec1009@iiitk.ac.in,Siddanadham SS Vijay Kumar,226EC1009,No slot allocated,FALSE
+126me0018@iiitk.ac.in,DHEERAVATH VARUNKANTH NAIK,126ME0018,No slot allocated,FALSE
+123me0018@iiitk.ac.in,Revanth,123me0018,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126ec00@iiitk.ac,Suman biswas,126ec0065,Invalid email ID,FALSE
+525cs0016@iiitk.ac.in,Rahul,525CS0016,No slot allocated,FALSE
+126ad0036@iiitk.ac.in,Ch.ram charan teja,126AD0036,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124CS0087@iiitk.ac.in,Ankur Dhanraj,124CS0087,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+525me0008@iiitk.ac.in,Rahul,525me0008,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+124ec0032@iiitk.ac.in,Ishan pandey,124ec0032,SLOT 5 (4:00 PM TO 5:30 PM),FALSE
+126ad0006@iiitk.ac.in,Tuhin Chaudhary,126AD0006,SLOT 8 (8:30 PM TO 10:00 PM),FALSE
+124cs0017@iiitk.ac.in,Dasari Akash,124CS0017,No slot allocated,FALSE
+124cs0033@iiitk.ac.in,BVMSL GANESH,124cs0033,No slot allocated,FALSE
+abhinav30official@gmail.com,abhinav sharma,123ad0017,Invalid email ID,FALSE
+123cs0044@iiitk.ac.in,M. HARSHA VARDHAN REDDY,123cs0044,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+526cs0004@iiitk.ac.in,ALAMPURI CHARAN KARTHIKEYA,526cs0004,No slot allocated,FALSE
+226cs2002@iiitk.ac.in,RAVULAPALLI HEMACHAND,226cs2002,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126me0037@iiitk.ac.in,MUMMADI SRAVAN KUMAR REDDY,126ME0037,No slot allocated,FALSE
+323me0001@iiitk.ac.in,S Abdul Azeez,323ME0001,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+126ad0067@iiitk.ac.in,Suprith Sai Reddy Kolan,126AD0067,No slot allocated,FALSE
+123ec0013@iiitk.ac.in,Vedansh Paliwal,123EC0013,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126ec0057@iiitk.ac.in,Bonthalakoti laxmana rao,126ec0057,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+524ec0003@iiitk.ac.in,Bharath kumar,524ec0003,No slot allocated,FALSE
+126ad0034@iiitk.ac.in,Mudavath Vishanth,126AD0034,No slot allocated,FALSE
+126cs0026@iiitk.ac.in,Appalle sushanth naidu,126CS0026,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126CS0019@iiitk.ac.in,AYUSH GOPI POL,126CS0019,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126ec0046@iiitk.ac.in,BASU BANU VENKATA SAI TEJA REDDY,126EC0046,No slot allocated,FALSE
+126CS0022@iiitk.ac.in,Pothi Reddy Jayanth Reddy,126CS0022,No slot allocated,FALSE
+126CS0028@iiitk.ac.in,K Teja Narasimha Chowdary,126CS0028,No slot allocated,FALSE
+126ad0058@iiitk.ac.in,P Dilson,126AD0058,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+226CS1001@iiitk.ac.in,Bhavesh Dahake,226CS1001,No slot allocated,FALSE
+226cs3002@iiitk.ac.in,Umang khurana,226cs3002,No slot allocated,FALSE
+226cs1012@iiitk.ac.in,Ashwin Nikose,226cs1012,No slot allocated,FALSE
+126me0011@iiitk.ac.in,RAVURI PADMA SRI BHASKAR DURGA RAO,126ME0011,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0034@iiitk.ac.in,Shailendra Pratap Singh,126cs0034,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+125ec0023@iiitk.ac.in,Mandeep,125ec0023,No slot allocated,FALSE
+226cs1008@iiitk.ac.in,Vivek K. Khunt,226cs1008,No slot allocated,FALSE
+526cs0009@iiitk.ac.in,HANUMAN MAURYA,526CS0009,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126me0051@iiitk.ac.in,M S Harinandan,126ME0051,No slot allocated,FALSE
+126cs0062@iiitk.ac.in,Jai charan,126CS0062,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0060@iiitk.ac.in,Alampalli Venkata Naga Sreekar,126CS0060,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0039@iiitk.ac.in,Navneet Verma,126CS0039,No slot allocated,FALSE
+123ec0006@iiitk.ac.in,Mridul S Kumar,123ec0006,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126CS0064,Tuntun kumar,126CS0064,Invalid email ID,FALSE
+123me0016@iiitk.ac.in,Nagulesh Thiagarajan,123me0016,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+226cs2007@iiitk.ac.in,Sumanth K,226cs2007,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126CS0069@iiik.ac.in,Doddapaneni Sriram,126CS0069,Invalid email ID,FALSE
+126ec0039@iiitk.ac.in,Arumalla mohana venkata satya pavan sai,126ec0039,No slot allocated,FALSE
+125me0030@iiitk.ac.in,Rewa Talegaonkar,125ME0030,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+126ad0046@iiitk.ac.in,Gugulothu Bhanu Prasad,126AD0046,No slot allocated,FALSE
+124ad0007@iiitk.ac.in,Rajesh,124ad0007,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+326me0005@iiitk.ac.in,MANGAM RAJU,326ME0005,No slot allocated,FALSE
+526AD0004@iiitk.ac.in,Abhilash,526AD004,No slot allocated,FALSE
+yogeswaralakshmannarra@gmail.com,NARRA YOGESWARA LAKSHMAN,124ad0014,Invalid email ID,FALSE
+126cs0065@iiitk.ac.in,Dadi N S S T Sai Kumar,126CS0065,No slot allocated,FALSE
+126cs0032@iiitk.ac.in,GADUGU GOWTHAM,126CS0032,No slot allocated,FALSE
+126ec0029@iiitk.ac.in,Vadde Surendra Babu,126EC0029,No slot allocated,FALSE
+123ec0024@iiitk.ac.in,Sandeep Likhithapudi,123EC0024,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+226cs1005@iiitk.ac.in,Debraj Mondal,226cs1005,No slot allocated,FALSE
+123cs0057@iiitk.ac.in,Ayush Singh,123cs0057,No slot allocated,FALSE
+225CS2010@iiitk.ac.in,Satheesh,225cs2010,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126ec0015@iiitk.ac.in,J bharath,126ec0015,No slot allocated,FALSE
+126ec0049@iiitk.ac.in,Sabhavath Abhishek Nayak,126ec0049,No slot allocated,FALSE
+126cs0001@iiitk.ac.in,DULLA NAGA SANDEEP,126cs0001,No slot allocated,FALSE
+126me0023@iiitk.ac.in,SAIPREETHAM NANDA GOPAL N,126me0023,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0018@iiitk.ac.in,Karengula Adeepsun,126cs0018,No slot allocated,FALSE
+225cs1014@iiitk.ac.in,PIDAMARTHI RAJA,225cs1014,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+526ad0006@iiitk.ac.in,Yapatla sharath,526AD0006,No slot allocated,FALSE
+123cs0043@iiitk.ac.in,Dudekula Sahera Safa,123CS0043,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
+126ec0033@iiitk.ac.in,KATAM VEERA SHIVA NAGA VIGNESH,126ec0033,No slot allocated,FALSE
+126cs0025@iiitk.ac.in,Arjun pathlavathh,126cs0025,No slot allocated,FALSE
+124cs0061@iiitk.ac.in,Manish,124cs0061,No slot allocated,FALSE
+124cs0063@iiitk.ac.in,K. Preetham Reddy,124CS0063,SLOT 4 (8:30 AM TO 10:00 AM),FALSE
+123cs0059@iiitk.ac.in,Harsh katiyar,123cs0059,No slot allocated,FALSE
+226ec2004@iiitk.ac.in,Sivababu Satyamsetti,226EC2004,SLOT 1 (4:30 AM TO 5:30 AM),FALSE
+126cs0061@iiitk.ac.in,Runosh lal,126cs0061,No slot allocated,FALSE
+126ec0071@iiitk.ac.in,MADARAGONI AJAY,126EC0071,No slot allocated,FALSE
+126me0032@iiitk.ac.in,Kolli Harsha Vardhan,126me0032,No slot allocated,FALSE
+126cs0023@iiitk.ac.in,Kallivarapu vinay kumar,126CS0023,No slot allocated,FALSE
+526cs0005@iiitk.ac.in,Dupathi koushik,526cs0005,No slot allocated,FALSE
+126ec0011@iiitk.ac.in,Bhargav,126ec0011,No slot allocated,FALSE
+126me0018@iiitk.ac.in,Varunkanth,126me0018,No slot allocated,FALSE
+126me0029@iiitk.ac.in,Tatiparthi kiran,126ME0029,No slot allocated,FALSE
+126me0044@iiitk.ac.in,MERETI Durga ram,126ME0044,No slot allocated,FALSE
+126me0049@iiitk.ac.in,Meruva Madhava Reddy,126ME0049,No slot allocated,FALSE
+126EC0005@iiitk.ac.in,JUTURU VISHNU ANJAN KUMAR,126EC0005,No slot allocated,FALSE
+226me1001@iiitk.ac.in,Anushka Singh,226me1001,SLOT 7 (7:00 PM TO 8:30 PM),FALSE
