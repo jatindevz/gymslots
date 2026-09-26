@@ -148,37 +148,25 @@ export default function GymAllocationDashboard({
   useEffect(() => {
     let isMounted = true;
 
-    try {
-      const savedCapacities = typeof window !== "undefined" ? localStorage.getItem("gym_slot_capacities_v2") : null;
-      if (savedCapacities) {
-        setSlotCapacities(JSON.parse(savedCapacities));
-      }
-    } catch (e) {
-      console.error("Storage error:", e);
-    }
+    // Always fetch the latest CSV directly.
+    // No localStorage is used for student/allocation data.
+    const loadLatestCSV = async () => {
+      try {
+        setLoading(true);
 
-    try {
-      const localData = typeof window !== "undefined" ? localStorage.getItem("gym_allocation_data_v2") : null;
-      if (localData) {
-        const parsed = JSON.parse(localData);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          if (isMounted) {
-            setStudents(parsed);
-            setLoading(false);
-          }
-          return;
+        // Cache-busting ensures the browser requests the latest CSV.
+        const response = await fetch(`${csvPath}?t=${Date.now()}`, {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load CSV: ${response.status} ${response.statusText}`
+          );
         }
-      }
-    } catch (e) {
-      console.error("Local storage error:", e);
-    }
 
-    fetch(csvPath)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network error");
-        return res.text();
-      })
-      .then((text) => {
+        const text = await response.text();
+
         const parsed = Papa.parse(text, {
           header: true,
           skipEmptyLines: true,
@@ -189,13 +177,16 @@ export default function GymAllocationDashboard({
         const rows = parsed.data
           .map((row) => {
             const findKey = (rowObject, candidates = []) => {
-              const normalize = (val) => String(val || "").replace(/\s+/g, "").toLowerCase();
+              const normalize = (val) =>
+                String(val || "").replace(/\s+/g, "").toLowerCase();
               const keys = Object.keys(rowObject);
+
               for (const candidate of candidates) {
                 for (const key of keys) {
                   if (normalize(key) === normalize(candidate)) return key;
                 }
               }
+
               return null;
             };
 
@@ -205,8 +196,13 @@ export default function GymAllocationDashboard({
             const slotKey = findKey(row, ["Allocated Slot", "AllocatedSlot", "Allocated", "Slot", "SLOT"]);
             const plKey = findKey(row, ["Powerlifting", "IsPowerlifter", "Category"]);
 
-            const safe = (key) => (key && row[key] != null ? String(row[key]).trim() : "");
-            const isPowerlifterVal = plKey ? String(row[plKey]).toLowerCase().includes("powerlifting") || String(row[plKey]).toLowerCase() === "true" : false;
+            const safe = (key) =>
+              key && row[key] != null ? String(row[key]).trim() : "";
+
+            const isPowerlifterVal = plKey
+              ? String(row[plKey]).toLowerCase().includes("powerlifting") ||
+                String(row[plKey]).toLowerCase() === "true"
+              : false;
 
             return {
               name: safe(nameKey),
@@ -220,16 +216,18 @@ export default function GymAllocationDashboard({
 
         if (isMounted) {
           setStudents(rows);
-          if (typeof window !== "undefined") {
-            localStorage.setItem("gym_allocation_data_v2", JSON.stringify(rows));
-          }
           setLoading(false);
         }
-      })
-      .catch((err) => {
-        console.error("CSV error:", err);
-        if (isMounted) setLoading(false);
-      });
+      } catch (error) {
+        console.error("CSV error:", error);
+        if (isMounted) {
+          setStudents([]);
+          setLoading(false);
+        }
+      }
+    };
+
+    loadLatestCSV();
 
     return () => {
       isMounted = false;
@@ -238,18 +236,7 @@ export default function GymAllocationDashboard({
 
   const updateDataState = (updatedList) => {
     setStudents(updatedList);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("gym_allocation_data_v2", JSON.stringify(updatedList));
-    }
     setSelectedIndices([]);
-  };
-
-  const handleCapacityChange = (slotId, newCapacity) => {
-    const updated = { ...slotCapacities, [slotId]: Math.max(1, parseInt(newCapacity, 10) || 1) };
-    setSlotCapacities(updated);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("gym_slot_capacities_v2", JSON.stringify(updated));
-    }
   };
 
   // ============================================================
