@@ -109,7 +109,7 @@ export default function GymAllocationDashboard({
       { id: "SLOT 1", type: "standard", time: "4:30 AM – 5:30 AM" },
       { id: "SLOT 2", type: "standard", time: "5:30 AM – 7:00 AM" },
       { id: "SLOT 3", type: "standard", time: "7:00 AM – 8:30 AM" },
-      { id: "SLOT 4", type: "standard", time: "8:30 AM – 10:00 PM" },
+      { id: "SLOT 4", type: "standard", time: "8:30 AM – 10:00 AM" },
       { id: "SLOT 5", type: "standard", time: "4:00 PM – 5:30 PM" },
       { id: "SLOT 6", type: "standard", time: "5:30 PM – 7:00 PM" },
       { id: "SLOT 7", type: "standard", time: "7:00 PM – 8:30 PM", note: "15 Seats Powerlifting Reserved" },
